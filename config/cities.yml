@@ -1,0 +1,45 @@
+# 关注城市白名单（第一版硬边界）。
+# 采集与分析只覆盖这些城市，其它城市场次一律忽略。
+# region: CN / HK / MO
+# band: 用于相似场次对照的区域带
+cities:
+  - name: 香港
+    aliases: [Hong Kong, HK, 香港]
+    region: HK
+    band: 港澳
+  - name: 澳门
+    aliases: [Macau, Macao, MO, 澳門, 澳门]
+    region: MO
+    band: 港澳
+  - name: 广州
+    aliases: [Guangzhou, 广州, 廣州]
+    region: CN
+    band: 珠三角
+  - name: 深圳
+    aliases: [Shenzhen, 深圳]
+    region: CN
+    band: 珠三角
+  - name: 上海
+    aliases: [Shanghai, 上海]
+    region: CN
+    band: 长三角
+  - name: 苏州
+    aliases: [Suzhou, 苏州, 蘇州]
+    region: CN
+    band: 长三角
+  - name: 杭州
+    aliases: [Hangzhou, 杭州]
+    region: CN
+    band: 长三角
+  - name: 南京
+    aliases: [Nanjing, 南京]
+    region: CN
+    band: 长三角
+  - name: 北京
+    aliases: [Beijing, Peking, 北京]
+    region: CN
+    band: 京津
+  - name: 天津
+    aliases: [Tianjin, 天津]
+    region: CN
+    band: 京津

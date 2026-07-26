@@ -1,0 +1,45 @@
+name: collect-prices
+
+on:
+  schedule:
+    # UTC 时间；对应北京时间约 09:00 / 15:00 / 21:00 / 01:00，一天 4 次
+    - cron: "0 1,7,13,17 * * *"
+  workflow_dispatch:
+    inputs:
+      dryrun:
+        description: "仅打印不写表(1=dry-run)"
+        required: false
+        default: "0"
+
+concurrency:
+  group: collect-prices
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Collect prices
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          CONCERTOWL_DRYRUN: ${{ github.event.inputs.dryrun }}
+        run: python -m concertowl.run_collect
+
+      - name: Refresh decision
+        if: ${{ github.event.inputs.dryrun != '1' }}
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+        run: python -m concertowl.decision

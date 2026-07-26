@@ -1,0 +1,81 @@
+# 关注歌手白名单。采集脚本只认表内名字（含别名 aliases）。
+# tier: 热度档 S/A/B，用于相似场次对照与溢价预期基线
+# active: false 表示暂不采集
+artists:
+  # ---- 华语顶流 / 殿堂 ----
+  - name: 陈奕迅
+    aliases: [Eason Chan, Eason, 陳奕迅]
+    tier: S
+    active: true
+  - name: 孙燕姿
+    aliases: [Stefanie Sun, 孫燕姿]
+    tier: S
+    active: true
+  - name: 王菲
+    aliases: [Faye Wong, 王菲]
+    tier: S
+    active: true
+  - name: 林俊杰
+    aliases: [JJ Lin, JJ, 林俊傑]
+    tier: S
+    active: true
+  - name: 王力宏
+    aliases: [Leehom Wang, Wang Leehom]
+    tier: A
+    active: true
+  - name: 陶喆
+    aliases: [David Tao, 陶喆]
+    tier: A
+    active: true
+  - name: 李宇春
+    aliases: [Chris Lee, Li Yuchun]
+    tier: A
+    active: true
+  - name: 张靓颖
+    aliases: [Jane Zhang, 張靚穎]
+    tier: A
+    active: true
+
+  # ---- 港星向（默认仅开杨千嬅；其余按需 active: true）----
+  - name: 杨千嬅
+    aliases: [Miriam Yeung, 楊千嬅]
+    tier: A
+    active: true
+  - name: 张学友
+    aliases: [Jacky Cheung, 張學友]
+    tier: S
+    active: false
+  - name: 容祖儿
+    aliases: [Joey Yung, 容祖兒]
+    tier: A
+    active: false
+  - name: 陈慧琳
+    aliases: [Kelly Chen, 陳慧琳]
+    tier: B
+    active: false
+
+  # ---- 独立 / 流行向 ----
+  - name: 陈粒
+    aliases: [Chen Li, 陳粒]
+    tier: B
+    active: true
+  - name: 周深
+    aliases: [Zhou Shen, Charlie Zhou]
+    tier: A
+    active: true
+  - name: 韦礼安
+    aliases: [Weibird, William Wei, 韋禮安]
+    tier: B
+    active: true
+  - name: 汪苏泷
+    aliases: [Silence Wang, 汪蘇瀧]
+    tier: B
+    active: true
+  - name: 张远
+    aliases: [Zhang Yuan]
+    tier: B
+    active: true
+  - name: 王铮亮
+    aliases: [Wang Zhengliang]
+    tier: B
+    active: true
