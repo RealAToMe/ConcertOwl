@@ -1,13 +1,20 @@
 name: collect-prices
 
+# 观察期策略：
+# - 每 6 小时：发现新场次 + 采价（攒历史）
+# - 暂不跑 Decision 分析
 on:
   schedule:
-    # UTC 时间；对应北京时间约 09:00 / 15:00 / 21:00 / 01:00，一天 4 次
-    - cron: "0 1,7,13,17 * * *"
+    # UTC 00/06/12/18 → 北京时间 08/14/20/02，一天 4 次
+    - cron: "0 0,6,12,18 * * *"
   workflow_dispatch:
     inputs:
       dryrun:
         description: "仅打印不写表(1=dry-run)"
+        required: false
+        default: "0"
+      skip_discover:
+        description: "跳过发现只采价(1=skip)"
         required: false
         default: "0"
 
@@ -18,7 +25,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
 
@@ -30,16 +37,18 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
+      - name: Discover shows into Watchlist
+        if: ${{ github.event.inputs.skip_discover != '1' }}
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          CONCERTOWL_DRYRUN: ${{ github.event.inputs.dryrun }}
+        # discover 已同时写一版快照；后续 collect 再刷新一次已有场次
+        run: python -m concertowl.discover
+
       - name: Collect prices
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           SHEET_ID: ${{ secrets.SHEET_ID }}
           CONCERTOWL_DRYRUN: ${{ github.event.inputs.dryrun }}
         run: python -m concertowl.run_collect
-
-      - name: Refresh decision
-        if: ${{ github.event.inputs.dryrun != '1' }}
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          SHEET_ID: ${{ secrets.SHEET_ID }}
-        run: python -m concertowl.decision

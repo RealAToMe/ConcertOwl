@@ -1,4 +1,4 @@
-"""读取 Watchlist 表，转成 WatchEvent，并按白名单校验。"""
+"""读取 / 写入 Watchlist，并按白名单校验。"""
 from __future__ import annotations
 
 from typing import List, Tuple
@@ -12,6 +12,23 @@ WATCHLIST_HEADER = [
     "show_datetime", "face_prices", "official_url", "secondary_url",
     "priority", "active",
 ]
+
+
+def _row_from_event(ev: WatchEvent) -> List[str]:
+    return [
+        ev.event_id,
+        ev.artist,
+        ev.tour,
+        ev.city,
+        ev.region,
+        ev.venue,
+        ev.show_datetime,
+        ev.face_prices,
+        ev.official_url,
+        ev.secondary_url,
+        ev.priority,
+        "true" if ev.active else "false",
+    ]
 
 
 def read_watchlist(storage: Storage) -> Tuple[List[WatchEvent], List[str]]:
@@ -46,12 +63,11 @@ def read_watchlist(storage: Storage) -> Tuple[List[WatchEvent], List[str]]:
             official_url=cell(row, "official_url"),
             secondary_url=cell(row, "secondary_url"),
             priority=cell(row, "priority") or "normal",
-            active=(cell(row, "active").lower() not in ("false", "0", "no", "")),
+            active=(cell(row, "active").lower() not in ("false", "0", "no")),
         )
         if not ev.active:
             continue
 
-        # 白名单硬校验
         if match_city(ev.city) is None:
             skipped.append(f"{ev.event_id or ev.artist}: 城市不在白名单({ev.city})")
             continue
@@ -61,3 +77,49 @@ def read_watchlist(storage: Storage) -> Tuple[List[WatchEvent], List[str]]:
         events.append(ev)
 
     return events, skipped
+
+
+def upsert_watchlist(storage: Storage, events: List[WatchEvent]) -> Tuple[int, int, int]:
+    """按 event_id 合并写入 Watchlist。返回 (新增, 更新, 总数)。"""
+    storage.ensure_sheet("Watchlist", WATCHLIST_HEADER)
+    existing_rows = storage.read_rows("Watchlist")
+    by_id = {}
+    extras = []
+
+    if existing_rows:
+        header = existing_rows[0]
+        idx = {name: i for i, name in enumerate(header)}
+        id_i = idx.get("event_id", 0)
+        for row in existing_rows[1:]:
+            if not any(str(c).strip() for c in row):
+                continue
+            eid = row[id_i].strip() if id_i < len(row) else ""
+            if eid:
+                by_id[eid] = row
+            else:
+                extras.append(row)
+
+    added = updated = 0
+    for ev in events:
+        row = _row_from_event(ev)
+        if ev.event_id in by_id:
+            old = by_id[ev.event_id]
+            if existing_rows:
+                header = existing_rows[0]
+                old_map = {
+                    header[i]: (old[i] if i < len(old) else "")
+                    for i in range(len(header))
+                }
+                if not ev.face_prices and old_map.get("face_prices"):
+                    row[WATCHLIST_HEADER.index("face_prices")] = old_map["face_prices"]
+                if not ev.official_url and old_map.get("official_url"):
+                    row[WATCHLIST_HEADER.index("official_url")] = old_map["official_url"]
+            by_id[ev.event_id] = row
+            updated += 1
+        else:
+            by_id[ev.event_id] = row
+            added += 1
+
+    out = [WATCHLIST_HEADER] + list(by_id.values()) + extras
+    storage.overwrite("Watchlist", out)
+    return added, updated, len(by_id) + len(extras)

@@ -1,39 +1,106 @@
 """摩天轮 / MoreTickets 二手挂牌最低价采集器。
 
-覆盖：
-- 大陆：m.moretickets.com / motianlun.cn
-- 港澳：moretickets.com 国际站（HK$ 挂牌）
+优先走国际站公开 API（api-global.moretickets.com）按 showId 刷新最低挂牌价；
+若没有 showId，再回退到页面解析。
 
-摩天轮不提供个人公开 API；用页面解析拿「档位最低挂牌价」。
-挂牌价 ≠ 成交价，只作代理指标。
+挂牌价 ≠ 成交价，只作观察指标。
 """
 from __future__ import annotations
 
 from typing import List, Optional
 
+from ..config import match_artist
 from ..models import PriceSnapshot, WatchEvent
+from ..mtl_api import MoreTicketsClient, parse_show_id_from_url
 from .base import Collector
 from . import _htmlutil as H
 
 
 class MoreTicketsCollector(Collector):
     source = "moretickets"
-    url_hints = ("moretickets.com", "motianlun", "piaofutong")
+    url_hints = ("moretickets.com", "motianlun", "piaofutong", "mtl_")
+
+    def __init__(self, min_interval: float = 1.2, timeout: float = 15.0):
+        super().__init__(min_interval=min_interval, timeout=timeout)
+        self._api = MoreTicketsClient(min_interval=min_interval, timeout=timeout)
+
+    def handles(self, event: WatchEvent) -> bool:
+        if event.event_id.startswith("mtl_"):
+            return True
+        return super().handles(event)
 
     def _target_url(self, event: WatchEvent) -> Optional[str]:
         return event.secondary_url or None
 
+    def _show_id(self, event: WatchEvent) -> Optional[str]:
+        if event.event_id.startswith("mtl_"):
+            return event.event_id[4:]
+        return parse_show_id_from_url(event.secondary_url or "")
+
     def fetch(self, event: WatchEvent) -> List[PriceSnapshot]:
+        show_id = self._show_id(event)
+        if show_id:
+            snap = self._from_api(event, show_id)
+            if snap:
+                return [snap]
+
         url = self._target_url(event)
         if not url:
-            return []
+            return [self._error_snapshot(event, "no showId/url")]
+        return self._from_html(event, url)
+
+    def _from_api(self, event: WatchEvent, show_id: str) -> Optional[PriceSnapshot]:
+        art = match_artist(event.artist)
+        keywords = []
+        if art:
+            keywords = [art.name] + list(art.aliases)
+        keywords.append(event.artist)
+        keywords = [k for k in keywords if k]
+
+        hit_price = None
+        currency = ""
+        status = "未知"
+        for kw in keywords[:4]:
+            for show in self._api.search(kw):
+                if show.show_id != show_id:
+                    continue
+                hit_price = show.min_price
+                currency = show.currency
+                status = {
+                    "ONSALE": "在售",
+                    "SOLDOUT": "售罄",
+                    "PENDING": "预售/待开售",
+                }.get((show.status or "").upper(), show.status or "未知")
+                break
+            if hit_price is not None:
+                break
+
+        if hit_price is None and not currency:
+            # 仍写一条，便于知道采过但暂无报价
+            return self._base_snapshot(
+                event,
+                tier="最低挂牌",
+                listed_min=None,
+                official_status=status,
+                raw_note=f"api no-price showId={show_id}",
+            )
+
+        return self._base_snapshot(
+            event,
+            tier="最低挂牌",
+            listed_min=hit_price,
+            premium_ratio=self._premium_ratio(event, hit_price),
+            official_status=status,
+            raw_note=f"api {currency} showId={show_id}".strip(),
+        )
+
+    def _from_html(self, event: WatchEvent, url: str) -> List[PriceSnapshot]:
         resp = self.get(url)
         if resp is None:
             return [self._error_snapshot(event, "fetch failed / blocked")]
         html = resp.text
 
-        # 优先 JSON（详情页常带 __NUXT__ / __INITIAL_STATE__）
-        snaps = self._from_json(event, html)
+        snaps = self._from_embedded_json(event, html)
         if snaps:
             return snaps
 
@@ -52,7 +119,7 @@ class MoreTicketsCollector(Collector):
             )
         ]
 
-    def _from_json(self, event: WatchEvent, html: str) -> List[PriceSnapshot]:
+    def _from_embedded_json(self, event: WatchEvent, html: str) -> List[PriceSnapshot]:
         data = H.find_json_block(html, ["__NUXT__", "__INITIAL_STATE__"])
         if not data:
             return []
@@ -76,7 +143,7 @@ class MoreTicketsCollector(Collector):
     @staticmethod
     def _collect_prices(node, out: List[float]) -> None:
         if isinstance(node, dict):
-            for key in ("price", "minPrice", "sellPrice", "ticketPrice", "salePrice"):
+            for key in ("price", "minPrice", "sellPrice", "ticketPrice", "salePrice", "minSalePrice"):
                 v = node.get(key)
                 try:
                     if v is not None:

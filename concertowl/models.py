@@ -31,10 +31,24 @@ class Artist:
     aliases: List[str] = field(default_factory=list)
 
     def matches(self, text: str) -> bool:
+        """标题命中本名或别名。短别名（如 JJ）要求词边界，减少误匹配。"""
         if not text:
             return False
+        import re
+
+        hay = text.lower()
         needles = [self.name] + list(self.aliases)
-        return any(n and n.lower() in text.lower() for n in needles)
+        for n in needles:
+            if not n:
+                continue
+            needle = n.lower().strip()
+            if len(needle) <= 2:
+                if re.search(rf"(?<![a-z0-9]){re.escape(needle)}(?![a-z0-9])", hay):
+                    return True
+            else:
+                if needle in hay:
+                    return True
+        return False
 
 
 @dataclass

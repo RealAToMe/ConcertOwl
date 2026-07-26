@@ -49,6 +49,25 @@ concertowl/
 .github/workflows/     collect.yml(定时) / bootstrap.yml(手动)
 ```
 
+## 观察期怎么跑（先攒数据，暂不做分析）
+
+你现在还不需要手动填关注场次。系统会：
+
+1. **自动发现**：按 `config/artists.yml` 里 `active: true` 的歌手，在白名单城市里找 MoreTickets 挂牌场次，写入 `Watchlist`
+2. **定时采价**：把每场最低挂牌价追加到 `PriceSnapshots`
+3. **暂不跑 Decision**（分析以后再说）
+
+### 推荐频率
+
+| 任务 | 频率 | 原因 |
+|------|------|------|
+| 发现 + 采价 | **每 6 小时（一天 4 次）** | 够画走势，又不至于触发反爬 / 烧光 Actions 分钟 |
+| 临场加密 | 以后再加（开演前 7 天可改为 3–4 小时） | 临场波动大时才需要更密 |
+
+当前 workflow 已按「每 6 小时」配置。在 GitHub Actions 里手动跑一次 `collect-prices` 即可开始观察；之后关机也没关系，云端会继续跑。
+
+> 现阶段主数据源是 **MoreTickets 国际站公开 API**（港澳覆盖最好，部分大陆场次也会出现）。大麦反爬强，观察期先不依赖它。
+
 ## 本地跑通（dry-run，无需任何凭证）
 
 ```bash
