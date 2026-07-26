@@ -20,6 +20,22 @@ artists:
     aliases: [JJ Lin, JJ, 林俊傑]
     tier: S
     active: true
+  - name: 周杰伦
+    aliases: [Jay Chou, Jay, 周杰倫]
+    tier: S
+    active: true
+  - name: 五月天
+    aliases: [Mayday, 五月天]
+    tier: S
+    active: true
+  - name: 张学友
+    aliases: [Jacky Cheung, 張學友]
+    tier: S
+    active: true
+  - name: 张信哲
+    aliases: [Jeff Chang, 張信哲]
+    tier: A
+    active: true
   - name: 王力宏
     aliases: [Leehom Wang, Wang Leehom]
     tier: A
@@ -36,37 +52,99 @@ artists:
     aliases: [Jane Zhang, 張靚穎]
     tier: A
     active: true
+  - name: 张杰
+    aliases: [Jason Zhang, 張傑]
+    tier: A
+    active: true
+  - name: 薛之谦
+    aliases: [Joker Xue, 薛之謙]
+    tier: A
+    active: true
+  - name: 李荣浩
+    aliases: [Ronghao Li, 李榮浩]
+    tier: A
+    active: true
 
-  # ---- 港星向（默认仅开杨千嬅；其余按需 active: true）----
+  # ---- 女声 / 创作 ----
+  - name: 蔡健雅
+    aliases: [Tanya Chua, 蔡健雅]
+    tier: A
+    active: true
+  - name: 徐佳莹
+    aliases: [Lala Hsu, 徐佳瑩]
+    tier: A
+    active: true
+  - name: 梁静茹
+    aliases: [Fish Leong, 梁靜茹]
+    tier: A
+    active: true
+  - name: 刘若英
+    aliases: [Rene Liu, 劉若英]
+    tier: A
+    active: true
+  - name: 陈绮贞
+    aliases: [Cheer Chen, 陳綺貞]
+    tier: B
+    active: true
+  - name: 袁娅维
+    aliases: [Tia Ray, 袁婭維]
+    tier: B
+    active: true
+  - name: 郁可唯
+    aliases: [Yisa Yu, 鬱可唯]
+    tier: B
+    active: true
+  - name: 单依纯
+    aliases: [Shan Yichun, 單依純]
+    tier: B
+    active: true
+
+  # ---- 港星向 ----
   - name: 杨千嬅
     aliases: [Miriam Yeung, 楊千嬅]
     tier: A
     active: true
-  - name: 张学友
-    aliases: [Jacky Cheung, 張學友]
-    tier: S
-    active: false
+  - name: 郑秀文
+    aliases: [Sammi Cheng, 鄭秀文]
+    tier: A
+    active: true
   - name: 容祖儿
     aliases: [Joey Yung, 容祖兒]
     tier: A
-    active: false
-  - name: 陈慧琳
-    aliases: [Kelly Chen, 陳慧琳]
-    tier: B
-    active: false
-
-  # ---- 独立 / 流行向 ----
-  - name: 陈粒
-    aliases: [Chen Li, 陳粒]
-    tier: B
     active: true
-  - name: 周深
-    aliases: [Zhou Shen, Charlie Zhou]
+  - name: 陈慧娴
+    aliases: [Priscilla Chan, 陳慧嫻]
     tier: A
     active: true
-  - name: 韦礼安
-    aliases: [Weibird, William Wei, 韋禮安]
-    tier: B
+  - name: 陈慧琳
+    aliases: [Kelly Chen, 陳慧琳]
+    tier: A
+    active: true
+
+  # ---- 流行 / 唱将 ----
+  - name: 苏打绿
+    aliases: [Sodagreen, 蘇打綠, 吴青峰, 吳青峰, Qing Feng Wu]
+    tier: A
+    active: true
+  - name: 毛不易
+    aliases: [Mao Buyi, 毛不易]
+    tier: A
+    active: true
+  - name: 许嵩
+    aliases: [Vae Xu, 許嵩]
+    tier: A
+    active: true
+  - name: 萧敬腾
+    aliases: [Jam Hsiao, 蕭敬騰]
+    tier: A
+    active: true
+  - name: 林宥嘉
+    aliases: [Yoga Lin, 林宥嘉]
+    tier: A
+    active: true
+  - name: 周深
+    aliases: [Zhou Shen, Charlie Zhou, Zhoushen]
+    tier: A
     active: true
   - name: 汪苏泷
     aliases: [Silence Wang, 汪蘇瀧]
@@ -78,5 +156,19 @@ artists:
     active: true
   - name: 王铮亮
     aliases: [Wang Zhengliang]
+    tier: B
+    active: true
+  - name: 韦礼安
+    aliases: [Weibird, William Wei, 韋禮安]
+    tier: B
+    active: true
+
+  # ---- 独立 / 流行向 ----
+  - name: 陈粒
+    aliases: [Chen Li, 陳粒]
+    tier: B
+    active: true
+  - name: 告五人
+    aliases: [Accusefive, 告五人]
     tier: B
     active: true
