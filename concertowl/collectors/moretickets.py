@@ -79,7 +79,8 @@ class MoreTicketsCollector(Collector):
             # 仍写一条，便于知道采过但暂无报价
             return self._base_snapshot(
                 event,
-                tier="最低挂牌",
+                tier="overall_min",
+                face_price=None,
                 listed_min=None,
                 official_status=status,
                 raw_note=f"api no-price showId={show_id}",
@@ -87,7 +88,8 @@ class MoreTicketsCollector(Collector):
 
         return self._base_snapshot(
             event,
-            tier="最低挂牌",
+            tier="overall_min",
+            face_price=None,
             listed_min=hit_price,
             premium_ratio=self._premium_ratio(event, hit_price),
             official_status=status,
@@ -110,7 +112,8 @@ class MoreTicketsCollector(Collector):
         return [
             self._base_snapshot(
                 event,
-                tier="最低挂牌",
+                tier="overall_min",
+                face_price=None,
                 listed_min=low,
                 listed_median=H.median(prices),
                 premium_ratio=self._premium_ratio(event, low),
@@ -131,7 +134,8 @@ class MoreTicketsCollector(Collector):
         return [
             self._base_snapshot(
                 event,
-                tier="最低挂牌",
+                tier="overall_min",
+                face_price=None,
                 listed_min=low,
                 listed_median=H.median(prices),
                 premium_ratio=self._premium_ratio(event, low),

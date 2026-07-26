@@ -42,7 +42,8 @@ class DamaiCollector(Collector):
         return [
             self._base_snapshot(
                 event,
-                tier="ALL",
+                tier="overall_min",
+                face_price=None,
                 listed_min=low,
                 listed_median=H.median(prices),
                 premium_ratio=self._premium_ratio(event, low),
@@ -67,10 +68,11 @@ class DamaiCollector(Collector):
                 self._base_snapshot(
                     event,
                     tier=name,
+                    face_price=price,
                     listed_min=price,
-                    premium_ratio=self._premium_ratio(event, price),
+                    premium_ratio=1.0 if price else None,
                     official_status=status,
-                    raw_note="json",
+                    raw_note="official-tier",
                 )
             )
         return out

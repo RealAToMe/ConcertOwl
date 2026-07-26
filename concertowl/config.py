@@ -70,5 +70,5 @@ def match_artist(text: str, active_only: bool = True) -> Optional[Artist]:
 
 
 def in_scope(text: str) -> bool:
-    """标题/描述里同时命中白名单城市与在采歌手，才算在范围内。"""
-    return match_city(text) is not None and match_artist(text) is not None
+    """观察期：标题命中关注歌手即可（不限城市）。"""
+    return match_artist(text) is not None

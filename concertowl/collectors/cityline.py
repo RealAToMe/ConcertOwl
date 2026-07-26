@@ -40,7 +40,8 @@ class CitylineCollector(Collector):
         return [
             self._base_snapshot(
                 event,
-                tier="官方档位",
+                tier="overall_min",
+                face_price=None,
                 listed_min=low,
                 listed_median=H.median(prices),
                 premium_ratio=self._premium_ratio(event, low),

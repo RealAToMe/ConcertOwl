@@ -1,6 +1,8 @@
 # ConcertOwl
 
-零预算的**演唱会票价走势采集与购票决策助手**。用 GitHub Actions 在云端定时采集你关注的歌手/城市的官方与二手票价，写入 Google Sheets，并给出三类决策建议：
+零预算的**演唱会票价走势采集与购票决策助手**。用 GitHub Actions 在云端定时采集你关注歌手的官方与二手票价，写入 Google Sheets；城市偏好用于以后分析加权。
+
+观察期先攒历史；以后再做三类决策建议：
 
 1. **抢票倾向** —— 开售后二手大概率溢价，值得抢/可接受代抢成本吗？
 2. **等待降价倾向** —— 大概率软场（卖不完），可以等二手更便宜吗？
@@ -11,13 +13,12 @@
 ## 架构
 
 ```
-Cities/Artists 白名单  ->  Watchlist(你维护)  ->  GitHub Actions(cron)
-                                                     |
-                    大麦官方价/售罄  摩天轮二手最低价  Cityline港澳官方
-                                                     |
-                                              PriceSnapshots(历史)
-                                                     |
-                                              Decision(三类建议)
+Artists关注名单  ->  自动发现全国场次  ->  GitHub Actions(cron)
+Cities偏好城市  ----------------------+->  以后分析时同城加权
+                                      |
+                 大麦官方分档 / MoreTickets挂牌 / Cityline
+                                      |
+                               PriceSnapshots(按档位分行)
 ```
 
 | 层级 | 方案 | 费用 |
@@ -26,25 +27,25 @@ Cities/Artists 白名单  ->  Watchlist(你维护)  ->  GitHub Actions(cron)
 | 存储/看板 | Google Sheets | 免费 |
 | 本地调试 | 落地为 `data/*.csv` 的 dry-run | 免费 |
 
-## 关注范围（第一版硬边界）
+## 关注范围
 
-- **城市**：香港、澳门、广州、深圳、上海、苏州、杭州、南京、北京、天津（见 [`config/cities.yml`](config/cities.yml)）
-- **歌手**：陈奕迅、孙燕姿、王菲、林俊杰、王力宏、陶喆、李宇春、张靓颖、杨千嬅、陈粒、周深、韦礼安、汪苏泷、张远、王铮亮等（见 [`config/artists.yml`](config/artists.yml)）
-- 港星默认只开杨千嬅，其余把 `active` 改成 `true` 即可采集。
-- 白名单外的城市/歌手一律不采集（例如某歌手成都站会被跳过）。
+- **采集（歌手为主）**：`config/artists.yml` 里 `active: true` 的歌手，**全国场次都收录**。想加歌手告诉我，或自己改 yml。
+- **城市偏好（分析用）**：香港、澳门、广州、深圳、上海、苏州、杭州、南京、北京、天津（见 [`config/cities.yml`](config/cities.yml)）。不参与采集过滤；以后问「北京杨千嬅」时，同城样本权重更高。
+- **价格粒度**：按官方档位分行记录（`tier` + `face_price`），不是只记全场最便宜一张。MoreTickets 公开接口目前常只能稳定拿到 `overall_min`，分档挂牌会逐步补齐。
 
 ## 目录结构
 
 ```
-config/                白名单：cities.yml / artists.yml
+config/                artists.yml（采集）/ cities.yml（分析偏好）
 concertowl/
   models.py            数据模型（WatchEvent / PriceSnapshot）
-  config.py            加载白名单与匹配
+  config.py            加载名单与匹配
   storage.py           存储后端：Google Sheets 或本地 CSV
-  watchlist.py         读 Watchlist + 白名单校验
-  bootstrap_sheet.py   初始化表头 + 写入白名单
+  watchlist.py         读 Watchlist（歌手校验）
+  discover.py          按歌手自动发现全国场次
+  bootstrap_sheet.py   初始化表头 + 写入名单
   run_collect.py       采集主入口
-  decision.py          生成三类决策，刷新 Decision 表
+  decision.py          生成三类决策（观察期暂不跑）
   collectors/          damai / moretickets / cityline 适配器
 .github/workflows/     collect.yml(定时) / bootstrap.yml(手动)
 ```
@@ -53,9 +54,9 @@ concertowl/
 
 你现在还不需要手动填关注场次。系统会：
 
-1. **自动发现**：按 `config/artists.yml` 里 `active: true` 的歌手，在白名单城市里找 MoreTickets 挂牌场次，写入 `Watchlist`
-2. **定时采价**：把每场最低挂牌价追加到 `PriceSnapshots`
-3. **暂不跑 Decision**（分析以后再说）
+1. **自动发现**：按 `config/artists.yml` 里 `active: true` 的歌手，收录其**全国** MoreTickets 挂牌场次到 `Watchlist`
+2. **定时采价**：按档位追加到 `PriceSnapshots`（能拿到分档就分档；否则先记 `overall_min`）
+3. **暂不跑 Decision**（分析以后再说；城市偏好那时再用）
 
 ### 推荐频率
 
@@ -66,8 +67,7 @@ concertowl/
 
 当前 workflow 已按「每 6 小时」配置。在 GitHub Actions 里手动跑一次 `collect-prices` 即可开始观察；之后关机也没关系，云端会继续跑。
 
-> 现阶段主数据源是 **MoreTickets 国际站公开 API**（港澳覆盖最好，部分大陆场次也会出现）。大麦反爬强，观察期先不依赖它。
-
+> 现阶段主数据源是 **MoreTickets 国际站公开 API**。大麦反爬强，观察期先不依赖它。
 ## 本地跑通（dry-run，无需任何凭证）
 
 ```bash
@@ -119,4 +119,4 @@ python -m concertowl.decision
 
 ## 明确不做
 
-自动抢票/下单、代理 IP 池、机器学习大模型、独立公网网站、任何付费云资源、白名单外的全站爬取。
+自动抢票/下单、代理 IP 池、机器学习大模型、独立公网网站、任何付费云资源、非关注歌手的全站爬取。

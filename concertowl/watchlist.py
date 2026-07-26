@@ -1,9 +1,12 @@
-"""读取 / 写入 Watchlist，并按白名单校验。"""
+"""读取 / 写入 Watchlist。
+
+观察期校验：只要求歌手在关注名单；城市可任意，用于以后分析加权。
+"""
 from __future__ import annotations
 
 from typing import List, Tuple
 
-from .config import match_artist, match_city
+from .config import match_artist
 from .models import WatchEvent
 from .storage import Storage
 
@@ -68,12 +71,10 @@ def read_watchlist(storage: Storage) -> Tuple[List[WatchEvent], List[str]]:
         if not ev.active:
             continue
 
-        if match_city(ev.city) is None:
-            skipped.append(f"{ev.event_id or ev.artist}: 城市不在白名单({ev.city})")
-            continue
         if match_artist(ev.artist) is None:
             skipped.append(f"{ev.event_id or ev.artist}: 歌手不在采集名单({ev.artist})")
             continue
+        # 城市不作为采集过滤条件；偏好城市仅用于以后分析加权
         events.append(ev)
 
     return events, skipped
