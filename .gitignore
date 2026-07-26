@@ -12,6 +12,9 @@ env/
 # Secrets / credentials
 credentials.json
 service_account.json
+service_account*.json
+*credentials*.json
+*-*.json
 *.pem
 .env
 .env.*
