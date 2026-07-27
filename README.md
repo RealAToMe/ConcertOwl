@@ -16,7 +16,7 @@
 Artists关注名单  ->  自动发现全国场次  ->  GitHub Actions(cron)
 Cities偏好城市  ----------------------+->  以后分析时同城加权
                                       |
-                 大麦官方分档 / MoreTickets挂牌 / Cityline
+       大麦官方分档 / 摩天轮国内+国际 / 票牛分档 / Cityline
                                       |
                                PriceSnapshots(按档位分行)
 ```
@@ -37,7 +37,13 @@ Cities偏好城市  ----------------------+->  以后分析时同城加权
   - `face_price`：官方档位面值（如 388）
   - `observed_price`：本次观测挂牌价
   - `premium_ratio`、`days_to_show`、`days_since_onsale`、`currency`、`source`、`status`、`note`
-- **数据源现状**：目前主源是 MoreTickets **国际站**公开 API，对港澳/海外场次较好，**大陆在售覆盖偏少**。大麦反爬强，分档挂牌接口还不稳。后续会补大陆源。旧的整表 `PriceSnapshots` 可手动删掉。
+- **数据源现状**：
+  - 摩天轮国内站：全国歌手搜索、演出详情、全场最低挂牌价（`overall_min`）
+  - MoreTickets 国际站：港澳及海外场次、全场最低挂牌价
+  - 票牛：公开网页 API，可按日期场次和官方票面档位采集最低挂牌价
+  - 大麦反爬较强，官方分档接口仍不稳定
+  - 摩天轮国内网页端不返回分档卖家库存，分档价格仍只在 App 购买链路中
+  - 旧的整表 `PriceSnapshots` 可手动删除
 
 ## 目录结构
 
@@ -48,7 +54,8 @@ concertowl/
   snapshots.py         按歌手分表追加时序观测
   discover.py          按歌手自动发现全国场次
   run_collect.py       采集主入口
-  collectors/          damai / moretickets / cityline
+  collectors/          damai / moretickets / piaoniu / cityline
+  mtl_cn_api.py        摩天轮国内站全国搜索与详情
 .github/workflows/     collect.yml(定时) / bootstrap.yml(手动)
 ```
 
@@ -67,7 +74,9 @@ concertowl/
 
 推送后请手动跑一次 **bootstrap-sheet**（重建 `价_*` 表头），再跑 **collect-prices**。
 
-> 现阶段主数据源是 MoreTickets 国际站。大陆覆盖与分档价是下一步重点。## 本地跑通（dry-run，无需任何凭证）
+> 票牛活动暂不能稳定按歌手自动搜索关联。自动发现仍以摩天轮为主；找到同一活动的票牛链接后填入 `piaoniu_url`，即可同时采集票牛分档价。
+
+## 本地跑通（dry-run，无需任何凭证）
 
 ```bash
 pip install -r requirements.txt
@@ -86,10 +95,11 @@ python -m concertowl.decision
 ```
 
 `Watchlist` 列：
-`event_id, artist, tour, city, region, venue, show_datetime, face_prices, official_url, secondary_url, priority, active`
+`event_id, artist, tour, city, region, venue, show_datetime, face_prices, onsale_datetime, official_url, secondary_url, piaoniu_url, priority, active`
 
 - `official_url`：大麦详情页或 Cityline 事件页
 - `secondary_url`：摩天轮/MoreTickets 详情页
+- `piaoniu_url`：票牛活动页，如 `https://x.piaoniu.com/activity/769142`
 - `face_prices`：官方档位，如 `380/680/980/1280`
 - `show_datetime`：ISO，如 `2026-08-22T19:00`
 

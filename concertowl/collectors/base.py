@@ -74,12 +74,13 @@ class Collector:
         status: str = "未知",
         currency: str = "",
         note: str = "",
+        source: Optional[str] = None,
     ) -> PriceSnapshot:
         return build_observation(
             event,
             observed_price=observed_price,
             face_price=face_price,
-            source=self.source,
+            source=source or self.source,
             status=status,
             currency=currency,
             note=note,

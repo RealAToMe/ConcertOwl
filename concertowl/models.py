@@ -77,6 +77,7 @@ class WatchEvent:
     onsale_datetime: str = "" # 开售时间（有则填，用于 days_since_onsale）
     official_url: str = ""
     secondary_url: str = ""
+    piaoniu_url: str = ""     # 票牛活动页；可与摩天轮 secondary_url 并存
     priority: str = "normal"
     active: bool = True
 

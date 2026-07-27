@@ -6,6 +6,7 @@ from typing import List, Optional
 from ..config import match_artist
 from ..models import PriceSnapshot, WatchEvent
 from ..mtl_api import MoreTicketsClient, parse_show_id_from_url
+from ..mtl_cn_api import MtlChinaClient
 from .base import Collector
 from . import _htmlutil as H
 
@@ -17,6 +18,7 @@ class MoreTicketsCollector(Collector):
     def __init__(self, min_interval: float = 1.2, timeout: float = 15.0):
         super().__init__(min_interval=min_interval, timeout=timeout)
         self._api = MoreTicketsClient(min_interval=min_interval, timeout=timeout)
+        self._cn_api = MtlChinaClient(min_interval=min_interval, timeout=timeout)
 
     def handles(self, event: WatchEvent) -> bool:
         if event.event_id.startswith("mtl_"):
@@ -43,6 +45,28 @@ class MoreTicketsCollector(Collector):
         return self._from_html(event, url)
 
     def _from_api(self, event: WatchEvent, show_id: str) -> Optional[PriceSnapshot]:
+        url = event.secondary_url or ""
+        is_domestic = "motianlun.cn" in url or not url
+        domestic = self._cn_api.detail(show_id) if is_domestic else None
+        if domestic and domestic.min_price is not None:
+            faces = self.face_price_list(event)
+            face = min(faces) if len(faces) == 1 else None
+            status = {
+                "ONSALE": "在售",
+                "PRESALE": "预售",
+                "PENDING": "待开售",
+                "SOLDOUT": "售罄",
+            }.get((domestic.status or "").upper(), domestic.status or "未知")
+            return self.observation(
+                event,
+                observed_price=domestic.min_price,
+                face_price=face,
+                status=status,
+                currency=domestic.currency or "CNY",
+                note=f"overall_min cn showId={show_id}",
+                source="motianlun_cn",
+            )
+
         art = match_artist(event.artist)
         keywords = []
         if art:

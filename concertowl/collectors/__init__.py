@@ -7,10 +7,16 @@ from .base import Collector
 from .damai import DamaiCollector
 from .moretickets import MoreTicketsCollector
 from .cityline import CitylineCollector
+from .piaoniu import PiaoniuCollector
 
 
 def all_collectors() -> List[Collector]:
-    return [DamaiCollector(), MoreTicketsCollector(), CitylineCollector()]
+    return [
+        DamaiCollector(),
+        MoreTicketsCollector(),
+        PiaoniuCollector(),
+        CitylineCollector(),
+    ]
 
 
 def collectors_by_name() -> dict:

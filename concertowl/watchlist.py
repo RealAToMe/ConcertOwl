@@ -10,7 +10,7 @@ from .storage import Storage
 WATCHLIST_HEADER = [
     "event_id", "artist", "tour", "city", "region", "venue",
     "show_datetime", "face_prices", "onsale_datetime",
-    "official_url", "secondary_url", "priority", "active",
+    "official_url", "secondary_url", "piaoniu_url", "priority", "active",
 ]
 
 
@@ -27,6 +27,7 @@ def _row_from_event(ev: WatchEvent) -> List[str]:
         ev.onsale_datetime,
         ev.official_url,
         ev.secondary_url,
+        ev.piaoniu_url,
         ev.priority,
         "true" if ev.active else "false",
     ]
@@ -63,6 +64,7 @@ def read_watchlist(storage: Storage) -> Tuple[List[WatchEvent], List[str]]:
             onsale_datetime=cell(row, "onsale_datetime"),
             official_url=cell(row, "official_url"),
             secondary_url=cell(row, "secondary_url"),
+            piaoniu_url=cell(row, "piaoniu_url"),
             priority=cell(row, "priority") or "normal",
             active=(cell(row, "active").lower() not in ("false", "0", "no")),
         )
@@ -101,7 +103,9 @@ def upsert_watchlist(storage: Storage, events: List[WatchEvent]) -> Tuple[int, i
                 extras.append(row)
 
     added = updated = 0
-    keep_fields = ("face_prices", "onsale_datetime", "official_url")
+    keep_fields = (
+        "face_prices", "onsale_datetime", "official_url", "piaoniu_url"
+    )
     for ev in events:
         row = _row_from_event(ev)
         if ev.event_id in by_id:

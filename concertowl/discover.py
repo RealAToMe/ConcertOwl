@@ -8,6 +8,7 @@ from typing import Dict, List, Tuple
 from .config import active_artists, match_artist, match_city
 from .models import WatchEvent
 from .mtl_api import LOCATION_IDS, MoreTicketsClient, MtlShow
+from .mtl_cn_api import MtlChinaClient
 from .snapshots import append_observations, build_observation
 from .storage import get_storage
 from .watchlist import WATCHLIST_HEADER, upsert_watchlist
@@ -79,7 +80,9 @@ def _status_cn(status: str) -> str:
     return status or "未知"
 
 
-def discover_shows(client: MoreTicketsClient) -> List[Tuple[WatchEvent, MtlShow]]:
+def discover_shows(
+    client: MoreTicketsClient, cn_client: MtlChinaClient
+) -> List[Tuple[WatchEvent, MtlShow]]:
     found: Dict[str, Tuple[WatchEvent, MtlShow]] = {}
 
     for city_name, loc_id in LOCATION_IDS.items():
@@ -92,6 +95,14 @@ def discover_shows(client: MoreTicketsClient) -> List[Tuple[WatchEvent, MtlShow]
             found[ev.event_id] = (ev, show)
 
     for art in active_artists():
+        print(f"[discover] 国内摩天轮搜索 {art.name}…")
+        for show in cn_client.search(art.name):
+            hit = match_artist(show.title, active_only=True)
+            if not hit or hit.name != art.name:
+                continue
+            ev = _to_event(show, art.name, _city_label(show))
+            found[ev.event_id] = (ev, show)
+
         keywords = [art.name] + list(art.aliases)
         keywords = sorted({k for k in keywords if k}, key=len, reverse=True)
         for kw in keywords[:4]:
@@ -133,7 +144,11 @@ def write_snapshots(storage, pairs: List[Tuple[WatchEvent, MtlShow]]) -> int:
                 ev,
                 observed_price=show.min_price,
                 face_price=None,
-                source="moretickets",
+                source=(
+                    "motianlun_cn"
+                    if "motianlun.cn" in show.web_url
+                    else "moretickets"
+                ),
                 status=_status_cn(show.status),
                 currency=show.currency or "",
                 note=f"overall_min showId={show.show_id}",
@@ -146,7 +161,8 @@ def run(also_snapshot: bool = True) -> int:
     storage = get_storage()
     storage.ensure_sheet("Watchlist", WATCHLIST_HEADER)
     client = MoreTicketsClient()
-    pairs = discover_shows(client)
+    cn_client = MtlChinaClient()
+    pairs = discover_shows(client, cn_client)
     events = [ev for ev, _ in pairs]
     added, updated, total = upsert_watchlist(storage, events)
     print(f"[discover] Watchlist 现有 {total} 场（新增 {added}，更新 {updated}）")

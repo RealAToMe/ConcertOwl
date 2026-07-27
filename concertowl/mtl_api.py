@@ -50,9 +50,12 @@ class MtlShow:
     status: str = ""
     min_price: Optional[float] = None
     currency: str = ""
+    web_url_value: str = ""
 
     @property
     def web_url(self) -> str:
+        if self.web_url_value:
+            return self.web_url_value
         code = self.show_code or self.show_id
         q = []
         if self.show_id:
