@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Dict, List, Tuple
 
 from .config import active_artists, match_artist, match_city
 from .models import WatchEvent
 from .mtl_api import LOCATION_IDS, MoreTicketsClient, MtlShow
 from .mtl_cn_api import MtlChinaClient
+from .piaoniu_api import PiaoniuActivity, PiaoniuClient
 from .snapshots import append_observations, build_observation
 from .storage import get_storage
 from .watchlist import WATCHLIST_HEADER, upsert_watchlist
@@ -23,9 +24,13 @@ class CityLabel:
 def _normalize_show_datetime(show_date: str) -> str:
     if not show_date:
         return ""
-    part = show_date.split("-")[0].strip().replace("/", "-")
-    if len(part) >= 10:
-        return part[:10] + "T19:00"
+    match = re.search(
+        r"(\d{4})[./-](\d{1,2})[./-](\d{1,2})",
+        show_date,
+    )
+    if match:
+        year, month, day = (int(part) for part in match.groups())
+        return f"{year:04d}-{month:02d}-{day:02d}T19:00"
     return show_date
 
 
@@ -80,8 +85,77 @@ def _status_cn(status: str) -> str:
     return status or "未知"
 
 
+def _plain_city(value: str) -> str:
+    hit = match_city(value or "")
+    if hit:
+        return hit.name
+    return (
+        (value or "")
+        .strip()
+        .replace("中国香港", "香港")
+        .replace("中国澳门", "澳门")
+        .replace("香港特别行政区", "香港")
+        .replace("澳门特别行政区", "澳门")
+    )
+
+
+def _event_date(event: WatchEvent) -> str:
+    match = re.search(r"\d{4}-\d{2}-\d{2}", event.show_datetime or "")
+    return match.group(0) if match else ""
+
+
+def _match_piaoniu(
+    event: WatchEvent, candidates: List[PiaoniuActivity]
+) -> PiaoniuActivity | None:
+    """只在「同歌手、同城、日期落在活动区间」唯一命中时自动绑定。"""
+    target_date = _event_date(event)
+    target_city = _plain_city(event.city)
+    if not target_date or not target_city or target_city == "未知":
+        return None
+
+    matched: List[PiaoniuActivity] = []
+    for item in candidates:
+        if item.proxy_buy or _plain_city(item.city) != target_city:
+            continue
+        if not item.start_date:
+            continue
+        end_date = item.end_date or item.start_date
+        if item.start_date <= target_date <= end_date:
+            matched.append(item)
+    return matched[0] if len(matched) == 1 else None
+
+
+def attach_piaoniu_urls(
+    pairs: List[Tuple[WatchEvent, MtlShow]], client: PiaoniuClient
+) -> List[Tuple[WatchEvent, MtlShow]]:
+    """按歌手批量发现候选，再用城市和日期安全关联到摩天轮场次。"""
+    by_artist: Dict[str, List[PiaoniuActivity]] = {}
+    for artist_name in sorted({ev.artist for ev, _ in pairs if ev.artist}):
+        print(f"[discover] 票牛搜索 {artist_name}…")
+        by_artist[artist_name] = client.search_artist(artist_name)
+
+    out: List[Tuple[WatchEvent, MtlShow]] = []
+    linked = 0
+    for event, show in pairs:
+        activity = _match_piaoniu(
+            event, by_artist.get(event.artist) or []
+        )
+        if activity:
+            event = replace(event, piaoniu_url=activity.web_url)
+            linked += 1
+            print(
+                f"[discover] 票牛关联 {event.artist}@{event.city}: "
+                f"{activity.activity_id} {activity.name}"
+            )
+        out.append((event, show))
+    print(f"[discover] 票牛自动关联 {linked}/{len(pairs)} 场")
+    return out
+
+
 def discover_shows(
-    client: MoreTicketsClient, cn_client: MtlChinaClient
+    client: MoreTicketsClient,
+    cn_client: MtlChinaClient,
+    piaoniu_client: PiaoniuClient,
 ) -> List[Tuple[WatchEvent, MtlShow]]:
     found: Dict[str, Tuple[WatchEvent, MtlShow]] = {}
 
@@ -114,7 +188,7 @@ def discover_shows(
                 ev = _to_event(show, art.name, _city_label(show))
                 found[ev.event_id] = (ev, show)
 
-    return list(found.values())
+    return attach_piaoniu_urls(list(found.values()), piaoniu_client)
 
 
 def _to_event(show: MtlShow, artist_name: str, city: CityLabel) -> WatchEvent:
@@ -162,7 +236,8 @@ def run(also_snapshot: bool = True) -> int:
     storage.ensure_sheet("Watchlist", WATCHLIST_HEADER)
     client = MoreTicketsClient()
     cn_client = MtlChinaClient()
-    pairs = discover_shows(client, cn_client)
+    piaoniu_client = PiaoniuClient()
+    pairs = discover_shows(client, cn_client, piaoniu_client)
     events = [ev for ev, _ in pairs]
     added, updated, total = upsert_watchlist(storage, events)
     print(f"[discover] Watchlist 现有 {total} 场（新增 {added}，更新 {updated}）")

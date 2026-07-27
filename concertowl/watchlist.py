@@ -104,8 +104,9 @@ def upsert_watchlist(storage: Storage, events: List[WatchEvent]) -> Tuple[int, i
 
     added = updated = 0
     keep_fields = (
-        "face_prices", "onsale_datetime", "official_url", "piaoniu_url"
+        "face_prices", "onsale_datetime", "official_url"
     )
+    always_keep_fields = ("piaoniu_url",)
     for ev in events:
         row = _row_from_event(ev)
         if ev.event_id in by_id:
@@ -114,6 +115,10 @@ def upsert_watchlist(storage: Storage, events: List[WatchEvent]) -> Tuple[int, i
             for field in keep_fields:
                 fi = WATCHLIST_HEADER.index(field)
                 if not row[fi] and old_map.get(field):
+                    row[fi] = old_map[field]
+            for field in always_keep_fields:
+                fi = WATCHLIST_HEADER.index(field)
+                if old_map.get(field):
                     row[fi] = old_map[field]
             by_id[ev.event_id] = row
             updated += 1
