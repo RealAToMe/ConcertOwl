@@ -1,11 +1,4 @@
-"""大麦（damai.cn）官方价 / 售罄状态采集器。
-
-大麦无公开个人 API，这里走详情页解析：
-1. 优先从页面 window.__INITIAL_STATE__ / __GLOBAL_DATA__ 抠 JSON 里的票档价格；
-2. 失败则回退到正则抓价格区间与售罄关键词。
-
-大麦反爬较强（IP 限制 / Cookie / 验证码）。个人低频使用；坏了按需维护。
-"""
+"""大麦官方档位采集器（页面解析，best-effort）。"""
 from __future__ import annotations
 
 from typing import List, Optional
@@ -28,27 +21,25 @@ class DamaiCollector(Collector):
             return []
         resp = self.get(url)
         if resp is None:
-            return [self._error_snapshot(event, "fetch failed / blocked")]
+            return []
         html = resp.text
 
         snaps = self._from_json(event, html)
         if snaps:
             return snaps
 
-        # 回退：正则
-        status = H.guess_status(html)
         prices = H.extract_prices(html)
         low = min(prices) if prices else None
+        if low is None:
+            return []
         return [
-            self._base_snapshot(
+            self.observation(
                 event,
-                tier="overall_min",
-                face_price=None,
-                listed_min=low,
-                listed_median=H.median(prices),
-                premium_ratio=self._premium_ratio(event, low),
-                official_status=status,
-                raw_note="regex-fallback" if low else "no-price-parsed",
+                observed_price=low,
+                face_price=low,
+                status=H.guess_status(html),
+                currency="CNY",
+                note="regex-fallback",
             )
         ]
 
@@ -62,24 +53,24 @@ class DamaiCollector(Collector):
         out: List[PriceSnapshot] = []
         for t in tickets:
             price = _to_float(t.get("price") or t.get("originalPrice") or t.get("current_price"))
-            name = str(t.get("name") or t.get("priceName") or t.get("skuName") or "档位")
+            if price is None:
+                continue
+            name = str(t.get("name") or t.get("priceName") or t.get("skuName") or "")
             status = _status_from(t.get("stockStatus") or t.get("status") or t.get("saleStatus"))
             out.append(
-                self._base_snapshot(
+                self.observation(
                     event,
-                    tier=name,
+                    observed_price=price,
                     face_price=price,
-                    listed_min=price,
-                    premium_ratio=1.0 if price else None,
-                    official_status=status,
-                    raw_note="official-tier",
+                    status=status,
+                    currency="CNY",
+                    note=f"official-tier {name}".strip(),
                 )
             )
         return out
 
     @staticmethod
     def _dig_tickets(data: dict) -> List[dict]:
-        """尽力在嵌套 JSON 里找票档数组。"""
         found: List[dict] = []
 
         def walk(node):
@@ -105,7 +96,6 @@ def _to_float(v) -> Optional[float]:
         f = float(str(v).replace(",", ""))
     except ValueError:
         return None
-    # 大麦有时用分为单位
     if f > 100000:
         f = f / 100.0
     return f

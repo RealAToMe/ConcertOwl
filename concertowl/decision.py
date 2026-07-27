@@ -1,26 +1,16 @@
-"""基于历史快照生成三类购票决策，刷新 Decision 表。
-
-第一版是「相似场次经验对照 + 规则」，不是 ML：
-  1. 抢票倾向     —— 二手溢价长期 > 1.2 则值得抢/可接受代抢
-  2. 等待降价倾向 —— 官方长期在售且溢价 <= 1 则可等二手
-  3. 临场底价区间 —— 相似场次「开演前<=3天」最低挂牌的 P25/P50
-
-相似优先级：同歌手历史 > 同 tier + 同区域带 > 同 tier。
-样本越少置信度越低。
-"""
+"""基于各「价_歌手」时序表生成决策（观察期可暂不跑）。"""
 from __future__ import annotations
 
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 
 from .bootstrap_sheet import DECISION_HEADER
-from .config import load_cities, match_artist, match_city
-from .models import SNAPSHOT_HEADER, now_local_iso
+from .config import match_artist, match_city
+from .models import artist_price_sheet, now_local_iso
 from .storage import Storage, get_storage
 from .watchlist import read_watchlist
 
 SECONDARY_SOURCES = {"moretickets"}
-OFFICIAL_SOURCES = {"damai", "cityline"}
 
 
 def _to_float(v) -> Optional[float]:
@@ -50,8 +40,8 @@ def _percentile(values: List[float], pct: float) -> Optional[float]:
     return round(vals[lo] * (1 - frac) + vals[hi] * frac, 1)
 
 
-def _load_snapshots(storage: Storage) -> List[dict]:
-    rows = storage.read_rows("PriceSnapshots")
+def _load_artist_snaps(storage: Storage, artist: str) -> List[dict]:
+    rows = storage.read_rows(artist_price_sheet(artist))
     if not rows:
         return []
     header = rows[0]
@@ -70,28 +60,24 @@ def _band_of(city: str) -> str:
 def refresh() -> int:
     storage = get_storage()
     events, _ = read_watchlist(storage)
-    snaps = _load_snapshots(storage)
-
-    # 按 event_id 归组二手快照
-    by_event_secondary: Dict[str, List[dict]] = defaultdict(list)
-    for s in snaps:
-        if s.get("source") in SECONDARY_SOURCES:
-            by_event_secondary[s.get("event_id", "")].append(s)
-
-    # event_id -> artist/city（来自 watchlist），用于相似匹配
-    ev_meta = {e.event_id: e for e in events}
+    # 按歌手缓存时序
+    cache: Dict[str, List[dict]] = {}
+    for ev in events:
+        if ev.artist not in cache:
+            cache[ev.artist] = _load_artist_snaps(storage, ev.artist)
 
     rows = [DECISION_HEADER]
     for ev in events:
-        latest_min, latest_premium, official_status, dts = _latest_metrics(ev, snaps)
-        grab, wait, floor_range, sample_n, conf = _advise(ev, snaps, ev_meta)
+        snaps = [s for s in cache.get(ev.artist, []) if s.get("event_id") == ev.event_id]
+        latest_min, latest_premium, status, dts = _latest_metrics(snaps)
+        grab, wait, floor_range, sample_n, conf = _advise(ev, cache)
         rows.append([
             ev.event_id, ev.artist, ev.city, ev.show_datetime,
             "" if dts is None else dts,
             "" if latest_min is None else latest_min,
             "" if latest_premium is None else latest_premium,
-            official_status,
-            grab, wait, floor_range, sample_n, conf, now_local_iso(),
+            status,
+            grab, wait, floor_range, sample_n, conf, now_local_iso(False),
         ])
 
     storage.ensure_sheet("Decision", DECISION_HEADER)
@@ -100,114 +86,65 @@ def refresh() -> int:
     return 0
 
 
-def _latest_metrics(ev, snaps) -> Tuple[Optional[float], Optional[float], str, Optional[int]]:
-    ev_snaps = [s for s in snaps if s.get("event_id") == ev.event_id]
-    ev_snaps.sort(key=lambda s: s.get("ts", ""))
+def _latest_metrics(snaps: List[dict]) -> Tuple[Optional[float], Optional[float], str, Optional[int]]:
+    snaps = sorted(snaps, key=lambda s: s.get("observed_at", ""))
     latest_min = None
     latest_premium = None
-    official_status = "未知"
+    status = "未知"
     dts = None
-    for s in ev_snaps:
+    for s in snaps:
         if s.get("source") in SECONDARY_SOURCES:
-            m = _to_float(s.get("listed_min"))
+            m = _to_float(s.get("observed_price"))
             if m is not None:
                 latest_min = m
                 latest_premium = _to_float(s.get("premium_ratio"))
-        if s.get("source") in OFFICIAL_SOURCES:
-            st = s.get("official_status")
-            if st and st != "未知":
-                official_status = st
+        st = s.get("status")
+        if st and st != "未知":
+            status = st
         d = _to_int(s.get("days_to_show"))
         if d is not None:
             dts = d
-    return latest_min, latest_premium, official_status, dts
+    return latest_min, latest_premium, status, dts
 
 
-def _similar_secondary(ev, snaps, ev_meta) -> List[dict]:
-    """挑选相似场次的二手快照。优先同歌手，其次同 tier+同区域带。"""
+def _advise(ev, cache: Dict[str, List[dict]]) -> Tuple[str, str, str, int, str]:
     art = match_artist(ev.artist)
     tier = art.tier if art else "B"
-    band = _band_of(ev.city)
-
-    same_artist, same_tier_band, same_tier = [], [], []
-    for s in snaps:
-        if s.get("source") not in SECONDARY_SOURCES:
-            continue
-        eid = s.get("event_id")
-        meta = ev_meta.get(eid)
-        if meta is None:
-            continue
-        s_art = match_artist(meta.artist)
-        s_tier = s_art.tier if s_art else "B"
-        s_band = _band_of(meta.city)
-        if match_artist(meta.artist) and art and s_art and s_art.name == art.name:
-            same_artist.append(s)
-        elif s_tier == tier and s_band == band:
-            same_tier_band.append(s)
-        elif s_tier == tier:
-            same_tier.append(s)
-
-    if same_artist:
-        return same_artist
-    if same_tier_band:
-        return same_tier_band
-    return same_tier
-
-
-def _advise(ev, snaps, ev_meta) -> Tuple[str, str, str, int, str]:
-    sim = _similar_secondary(ev, snaps, ev_meta)
+    sim = list(cache.get(ev.artist, []))
     premiums = [p for p in (_to_float(s.get("premium_ratio")) for s in sim) if p is not None]
     sample_n = len(premiums)
 
-    art = match_artist(ev.artist)
-    tier = art.tier if art else "B"
-
-    # 置信度：主要看相似样本量
-    if sample_n >= 12:
-        conf = "中"
-    elif sample_n >= 4:
-        conf = "低-中"
-    else:
-        conf = "低"
-
-    # 抢票倾向
-    med_premium = _percentile(premiums, 0.5) if premiums else None
-    if med_premium is not None:
-        if med_premium >= 1.2:
-            grab = f"值得抢/可接受代抢(中位溢价×{med_premium})"
-        elif med_premium <= 1.0:
-            grab = f"可不抢(中位溢价×{med_premium})"
+    conf = "中" if sample_n >= 12 else ("低-中" if sample_n >= 4 else "低")
+    med = _percentile(premiums, 0.5) if premiums else None
+    if med is not None:
+        if med >= 1.2:
+            grab = f"值得抢/可接受代抢(中位溢价×{med})"
+        elif med <= 1.0:
+            grab = f"可不抢(中位溢价×{med})"
         else:
-            grab = f"看情况(中位溢价×{med_premium})"
+            grab = f"看情况(中位溢价×{med})"
     else:
-        # 无历史，用 tier 经验先给弱先验
-        prior = {"S": "大概率值得抢(S档经验)", "A": "偏向可抢(A档经验)", "B": "可不急(B档经验)"}
-        grab = prior.get(tier, "数据不足")
+        grab = {"S": "大概率值得抢(S档经验)", "A": "偏向可抢(A档经验)", "B": "可不急(B档经验)"}.get(tier, "数据不足")
 
-    # 等待降价倾向：相似样本里溢价<=1 的比例
     if premiums:
-        below = sum(1 for p in premiums if p <= 1.0)
-        ratio = below / len(premiums)
-        if ratio >= 0.5:
-            wait = f"可等二手(约{int(ratio*100)}%时段低于面值)"
-        elif ratio >= 0.2:
-            wait = f"边等边设心理价({int(ratio*100)}%时段跌破面值)"
+        below = sum(1 for p in premiums if p <= 1.0) / len(premiums)
+        if below >= 0.5:
+            wait = f"可等二手(约{int(below*100)}%时段低于面值)"
+        elif below >= 0.2:
+            wait = f"边等边设心理价({int(below*100)}%时段跌破面值)"
         else:
             wait = "不建议等(很少跌破面值)"
     else:
         wait = {"S": "不建议等", "A": "谨慎等", "B": "可以等"}.get(tier, "数据不足")
 
-    # 临场底价区间：相似场次 days_to_show<=3 的最低挂牌
-    late_mins = []
+    late = []
     for s in sim:
         d = _to_int(s.get("days_to_show"))
-        m = _to_float(s.get("listed_min"))
+        m = _to_float(s.get("observed_price"))
         if d is not None and m is not None and d <= 3:
-            late_mins.append(m)
-    if late_mins:
-        p25 = _percentile(late_mins, 0.25)
-        p50 = _percentile(late_mins, 0.5)
-        floor_range = f"{p25}~{p50}"
+            late.append(m)
+    if late:
+        floor_range = f"{_percentile(late, 0.25)}~{_percentile(late, 0.5)}"
     else:
         floor_range = "样本不足"
 

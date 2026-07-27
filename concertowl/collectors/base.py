@@ -1,9 +1,4 @@
-"""采集器基类：统一的限速 HTTP 会话与容错。
-
-设计原则：
-- 单个源失败绝不影响其它源（collect 内部吞掉异常并返回空 + 记录 note）。
-- 严格低频、带 UA、随机抖动，个人自用，尊重目标站点。
-"""
+"""采集器基类：统一限速 HTTP 与观测构造。"""
 from __future__ import annotations
 
 import random
@@ -12,7 +7,8 @@ from typing import List, Optional
 
 import requests
 
-from ..models import PriceSnapshot, WatchEvent, now_local_iso, days_between
+from ..models import PriceSnapshot, WatchEvent
+from ..snapshots import build_observation
 
 DEFAULT_HEADERS = {
     "User-Agent": (
@@ -25,7 +21,6 @@ DEFAULT_HEADERS = {
 
 class Collector:
     source: str = "base"
-    #: 该采集器负责哪些 Watchlist.secondary_url / official_url 前缀
     url_hints: tuple = ()
 
     def __init__(self, min_interval: float = 2.0, timeout: float = 15.0):
@@ -35,7 +30,6 @@ class Collector:
         self._session.headers.update(DEFAULT_HEADERS)
         self._last_request = 0.0
 
-    # ---- HTTP 帮助 ----
     def _throttle(self) -> None:
         elapsed = time.time() - self._last_request
         wait = self.min_interval - elapsed
@@ -53,9 +47,7 @@ class Collector:
         except requests.RequestException:
             return None
 
-    # ---- 子类实现 ----
     def handles(self, event: WatchEvent) -> bool:
-        """该采集器是否负责这场演出（默认看 URL 是否匹配 hint）。"""
         url = self._target_url(event) or ""
         return any(h in url for h in self.url_hints)
 
@@ -63,29 +55,35 @@ class Collector:
         raise NotImplementedError
 
     def fetch(self, event: WatchEvent) -> List[PriceSnapshot]:
-        """真正解析目标页/接口，返回快照。子类实现。"""
         raise NotImplementedError
 
-    # ---- 对外统一入口，带容错 ----
     def collect(self, event: WatchEvent) -> List[PriceSnapshot]:
         try:
-            snaps = self.fetch(event)
-        except Exception as exc:  # 绝不让单点异常炸掉整轮
-            return [self._error_snapshot(event, f"{type(exc).__name__}: {exc}")]
-        return snaps
+            return self.fetch(event)
+        except Exception as exc:
+            # 错误不写时序（无价格），只打日志用空列表；需要痕迹时由调用方打印
+            print(f"[collect][{self.source}] ERROR {event.event_id}: {type(exc).__name__}: {exc}")
+            return []
 
-    # ---- 快照构造帮助 ----
-    def _base_snapshot(self, event: WatchEvent, **kw) -> PriceSnapshot:
-        return PriceSnapshot(
-            ts=now_local_iso(),
-            event_id=event.event_id,
+    def observation(
+        self,
+        event: WatchEvent,
+        *,
+        observed_price: Optional[float],
+        face_price: Optional[float] = None,
+        status: str = "未知",
+        currency: str = "",
+        note: str = "",
+    ) -> PriceSnapshot:
+        return build_observation(
+            event,
+            observed_price=observed_price,
+            face_price=face_price,
             source=self.source,
-            days_to_show=days_between(event.show_datetime),
-            **kw,
+            status=status,
+            currency=currency,
+            note=note,
         )
-
-    def _error_snapshot(self, event: WatchEvent, note: str) -> PriceSnapshot:
-        return self._base_snapshot(event, official_status="未知", raw_note=f"ERROR {note}")
 
     @staticmethod
     def face_price_list(event: WatchEvent) -> List[float]:
@@ -99,12 +97,3 @@ class Collector:
             except ValueError:
                 continue
         return out
-
-    def _premium_ratio(self, event: WatchEvent, listed_min: Optional[float]) -> Optional[float]:
-        faces = self.face_price_list(event)
-        if listed_min is None or not faces:
-            return None
-        base = min(faces)
-        if base <= 0:
-            return None
-        return round(listed_min / base, 3)

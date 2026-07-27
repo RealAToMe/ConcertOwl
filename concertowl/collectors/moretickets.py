@@ -1,10 +1,4 @@
-"""摩天轮 / MoreTickets 二手挂牌最低价采集器。
-
-优先走国际站公开 API（api-global.moretickets.com）按 showId 刷新最低挂牌价；
-若没有 showId，再回退到页面解析。
-
-挂牌价 ≠ 成交价，只作观察指标。
-"""
+"""摩天轮 / MoreTickets 挂牌价采集器（优先公开 API）。"""
 from __future__ import annotations
 
 from typing import List, Optional
@@ -41,12 +35,11 @@ class MoreTicketsCollector(Collector):
         show_id = self._show_id(event)
         if show_id:
             snap = self._from_api(event, show_id)
-            if snap:
-                return [snap]
+            return [snap] if snap else []
 
         url = self._target_url(event)
         if not url:
-            return [self._error_snapshot(event, "no showId/url")]
+            return []
         return self._from_html(event, url)
 
     def _from_api(self, event: WatchEvent, show_id: str) -> Optional[PriceSnapshot]:
@@ -65,7 +58,7 @@ class MoreTicketsCollector(Collector):
                 if show.show_id != show_id:
                     continue
                 hit_price = show.min_price
-                currency = show.currency
+                currency = show.currency or ""
                 status = {
                     "ONSALE": "在售",
                     "SOLDOUT": "售罄",
@@ -75,89 +68,36 @@ class MoreTicketsCollector(Collector):
             if hit_price is not None:
                 break
 
-        if hit_price is None and not currency:
-            # 仍写一条，便于知道采过但暂无报价
-            return self._base_snapshot(
-                event,
-                tier="overall_min",
-                face_price=None,
-                listed_min=None,
-                official_status=status,
-                raw_note=f"api no-price showId={show_id}",
-            )
+        if hit_price is None:
+            return None
 
-        return self._base_snapshot(
+        # API 暂只能拿到全场最低挂牌；有 face_prices 时仍先记 overall，分档后补
+        faces = self.face_price_list(event)
+        face = min(faces) if len(faces) == 1 else None
+        return self.observation(
             event,
-            tier="overall_min",
-            face_price=None,
-            listed_min=hit_price,
-            premium_ratio=self._premium_ratio(event, hit_price),
-            official_status=status,
-            raw_note=f"api {currency} showId={show_id}".strip(),
+            observed_price=hit_price,
+            face_price=face,
+            status=status,
+            currency=currency,
+            note=f"overall_min showId={show_id}",
         )
 
     def _from_html(self, event: WatchEvent, url: str) -> List[PriceSnapshot]:
         resp = self.get(url)
         if resp is None:
-            return [self._error_snapshot(event, "fetch failed / blocked")]
+            return []
         html = resp.text
-
-        snaps = self._from_embedded_json(event, html)
-        if snaps:
-            return snaps
-
         prices = H.extract_prices(html)
         low = min(prices) if prices else None
-        status = H.guess_status(html)
+        if low is None:
+            return []
         return [
-            self._base_snapshot(
+            self.observation(
                 event,
-                tier="overall_min",
+                observed_price=low,
                 face_price=None,
-                listed_min=low,
-                listed_median=H.median(prices),
-                premium_ratio=self._premium_ratio(event, low),
-                official_status=status,
-                raw_note=f"listings~{len(prices)}" if low else "no-price-parsed",
+                status=H.guess_status(html),
+                note=f"html listings~{len(prices)}",
             )
         ]
-
-    def _from_embedded_json(self, event: WatchEvent, html: str) -> List[PriceSnapshot]:
-        data = H.find_json_block(html, ["__NUXT__", "__INITIAL_STATE__"])
-        if not data:
-            return []
-        prices: List[float] = []
-        self._collect_prices(data, prices)
-        if not prices:
-            return []
-        low = min(prices)
-        return [
-            self._base_snapshot(
-                event,
-                tier="overall_min",
-                face_price=None,
-                listed_min=low,
-                listed_median=H.median(prices),
-                premium_ratio=self._premium_ratio(event, low),
-                official_status="在售",
-                raw_note=f"json listings~{len(prices)}",
-            )
-        ]
-
-    @staticmethod
-    def _collect_prices(node, out: List[float]) -> None:
-        if isinstance(node, dict):
-            for key in ("price", "minPrice", "sellPrice", "ticketPrice", "salePrice", "minSalePrice"):
-                v = node.get(key)
-                try:
-                    if v is not None:
-                        f = float(str(v).replace(",", ""))
-                        if 10 <= f <= 100000:
-                            out.append(f)
-                except (ValueError, TypeError):
-                    pass
-            for v in node.values():
-                MoreTicketsCollector._collect_prices(v, out)
-        elif isinstance(node, list):
-            for v in node:
-                MoreTicketsCollector._collect_prices(v, out)

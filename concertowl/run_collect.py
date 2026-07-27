@@ -1,24 +1,17 @@
-"""采集主入口：读 Watchlist -> 跑各采集器 -> 追加写入 PriceSnapshots。
-
-用法：
-  python -m concertowl.run_collect
-Dry-run：
-  CONCERTOWL_DRYRUN=1 python -m concertowl.run_collect
-"""
+"""采集主入口：读 Watchlist -> 各采集器 -> 按歌手分表追加时序观测。"""
 from __future__ import annotations
 
 from typing import List
 
 from .collectors import all_collectors
-from .models import SNAPSHOT_HEADER, PriceSnapshot
+from .models import PriceSnapshot
+from .snapshots import append_observations
 from .storage import get_storage
 from .watchlist import read_watchlist
 
 
 def run() -> int:
     storage = get_storage()
-    storage.ensure_sheet("PriceSnapshots", SNAPSHOT_HEADER)
-
     events, skipped = read_watchlist(storage)
     for s in skipped:
         print(f"[skip] {s}")
@@ -28,8 +21,7 @@ def run() -> int:
         return 0
 
     collectors = all_collectors()
-    all_rows: List[List[str]] = []
-    snap_count = 0
+    all_snaps: List[PriceSnapshot] = []
 
     for ev in events:
         matched = [c for c in collectors if c.handles(ev)]
@@ -37,23 +29,18 @@ def run() -> int:
             print(f"[warn] {ev.event_id} 无匹配采集器（检查 official_url/secondary_url）")
             continue
         for c in matched:
-            snaps: List[PriceSnapshot] = c.collect(ev)
-            for snap in snaps:
-                all_rows.append(snap.as_row(SNAPSHOT_HEADER))
-                snap_count += 1
-            _log(ev, c.source, snaps)
+            snaps = c.collect(ev)
+            all_snaps.extend(snaps)
+            for s in snaps:
+                price = s.observed_price if s.observed_price is not None else "-"
+                print(
+                    f"  [{c.source}] {ev.artist}@{ev.city} "
+                    f"face={s.face_price or '-'} obs={price} {s.currency} note={s.note}"
+                )
 
-    if all_rows:
-        storage.append_rows("PriceSnapshots", all_rows)
-    print(f"[collect] 完成：{len(events)} 场，写入 {snap_count} 条快照。")
+    n = append_observations(storage, all_snaps)
+    print(f"[collect] 完成：{len(events)} 场，写入 {n} 条时序观测。")
     return 0
-
-
-def _log(ev, source, snaps) -> None:
-    for s in snaps:
-        price = s.listed_min if s.listed_min is not None else "-"
-        print(f"  [{source}] {ev.event_id} {ev.artist}@{ev.city} "
-              f"min={price} status={s.official_status} note={s.raw_note}")
 
 
 if __name__ == "__main__":

@@ -30,45 +30,44 @@ Cities偏好城市  ----------------------+->  以后分析时同城加权
 ## 关注范围
 
 - **采集（歌手为主）**：`config/artists.yml` 里 `active: true` 的歌手，**全国场次都收录**。想加歌手告诉我，或自己改 yml。
-- **城市偏好（分析用）**：香港、澳门、广州、深圳、上海、苏州、杭州、南京、北京、天津（见 [`config/cities.yml`](config/cities.yml)）。不参与采集过滤；以后问「北京杨千嬅」时，同城样本权重更高。
-- **价格粒度**：按官方档位分行记录（`tier` + `face_price`），不是只记全场最便宜一张。MoreTickets 公开接口目前常只能稳定拿到 `overall_min`，分档挂牌会逐步补齐。
+- **城市偏好（分析用）**：见 [`config/cities.yml`](config/cities.yml)。不参与采集过滤；以后问「北京杨千嬅」时，同城样本权重更高。
+- **价格表结构（时序）**：每位歌手一张表 `价_歌手名`，**每次观测追加一行**，便于画走势：
+  - `observed_at`：观测时间（精确到分钟）
+  - `event_id` / `city` / `tour` / `show_datetime`
+  - `face_price`：官方档位面值（如 388）
+  - `observed_price`：本次观测挂牌价
+  - `premium_ratio`、`days_to_show`、`days_since_onsale`、`currency`、`source`、`status`、`note`
+- **数据源现状**：目前主源是 MoreTickets **国际站**公开 API，对港澳/海外场次较好，**大陆在售覆盖偏少**。大麦反爬强，分档挂牌接口还不稳。后续会补大陆源。旧的整表 `PriceSnapshots` 可手动删掉。
 
 ## 目录结构
 
 ```
 config/                artists.yml（采集）/ cities.yml（分析偏好）
 concertowl/
-  models.py            数据模型（WatchEvent / PriceSnapshot）
-  config.py            加载名单与匹配
-  storage.py           存储后端：Google Sheets 或本地 CSV
-  watchlist.py         读 Watchlist（歌手校验）
+  models.py            WatchEvent / PriceSnapshot
+  snapshots.py         按歌手分表追加时序观测
   discover.py          按歌手自动发现全国场次
-  bootstrap_sheet.py   初始化表头 + 写入名单
   run_collect.py       采集主入口
-  decision.py          生成三类决策（观察期暂不跑）
-  collectors/          damai / moretickets / cityline 适配器
+  collectors/          damai / moretickets / cityline
 .github/workflows/     collect.yml(定时) / bootstrap.yml(手动)
 ```
 
 ## 观察期怎么跑（先攒数据，暂不做分析）
 
-你现在还不需要手动填关注场次。系统会：
-
-1. **自动发现**：按 `config/artists.yml` 里 `active: true` 的歌手，收录其**全国** MoreTickets 挂牌场次到 `Watchlist`
-2. **定时采价**：按档位追加到 `PriceSnapshots`（能拿到分档就分档；否则先记 `overall_min`）
-3. **暂不跑 Decision**（分析以后再说；城市偏好那时再用）
+1. **自动发现**：关注歌手的全国场次写入 `Watchlist`
+2. **定时采价**：写入对应 `价_歌手` 表（每次观测一行）
+3. **暂不跑 Decision**
 
 ### 推荐频率
 
 | 任务 | 频率 | 原因 |
 |------|------|------|
-| 发现 + 采价 | **每 6 小时（一天 4 次）** | 够画走势，又不至于触发反爬 / 烧光 Actions 分钟 |
-| 临场加密 | 以后再加（开演前 7 天可改为 3–4 小时） | 临场波动大时才需要更密 |
+| 发现 + 采价 | **每 6 小时（一天 4 次）** | 够画走势，又不易触发反爬 |
+| 临场加密 | 以后再加 | 临场波动大时再加密 |
 
-当前 workflow 已按「每 6 小时」配置。在 GitHub Actions 里手动跑一次 `collect-prices` 即可开始观察；之后关机也没关系，云端会继续跑。
+推送后请手动跑一次 **bootstrap-sheet**（重建 `价_*` 表头），再跑 **collect-prices**。
 
-> 现阶段主数据源是 **MoreTickets 国际站公开 API**。大麦反爬强，观察期先不依赖它。
-## 本地跑通（dry-run，无需任何凭证）
+> 现阶段主数据源是 MoreTickets 国际站。大陆覆盖与分档价是下一步重点。## 本地跑通（dry-run，无需任何凭证）
 
 ```bash
 pip install -r requirements.txt
