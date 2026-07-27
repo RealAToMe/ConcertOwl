@@ -247,8 +247,14 @@ def run(also_snapshot: bool = True) -> int:
     if also_snapshot:
         n = write_snapshots(storage, pairs)
         print(f"[discover] 写入 {n} 条时序观测")
+    else:
+        print("[discover] 跳过快照写入（交给后续 collect）")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(run(also_snapshot=True))
+    import os
+
+    # Actions 里紧接着会跑 collect，默认跳过发现阶段写快照，降低 Sheets 限流。
+    also = os.environ.get("CONCERTOWL_DISCOVER_SNAPSHOT", "1") == "1"
+    raise SystemExit(run(also_snapshot=also))

@@ -1,6 +1,7 @@
 """按时序追加价格观测到「按歌手分表」。"""
 from __future__ import annotations
 
+import time
 from collections import defaultdict
 from typing import Dict, Iterable, List, Optional
 
@@ -68,6 +69,8 @@ def append_observations(storage: Storage, snaps: Iterable[PriceSnapshot]) -> int
         storage.ensure_sheet(sheet, SNAPSHOT_HEADER)
         storage.append_rows(sheet, rows)
         print(f"[snapshot] {sheet} += {len(rows)}")
+        # 多表连续写入时稍作间隔，降低 Google Sheets 写配额触发概率
+        time.sleep(0.4)
     return count
 
 

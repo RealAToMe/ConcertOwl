@@ -43,7 +43,8 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           SHEET_ID: ${{ secrets.SHEET_ID }}
           CONCERTOWL_DRYRUN: ${{ github.event.inputs.dryrun }}
-        # discover 已同时写一版快照；后续 collect 再刷新一次已有场次
+          # collect 会立刻再写一版；这里跳过快照，避免 Sheets 写配额打满
+          CONCERTOWL_DISCOVER_SNAPSHOT: "0"
         run: python -m concertowl.discover
 
       - name: Collect prices

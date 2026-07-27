@@ -11,9 +11,13 @@ from __future__ import annotations
 import csv
 import json
 import os
-from typing import List, Optional
+import random
+import time
+from typing import Callable, List, Optional, TypeVar
 
 SHEET_NAMES = ["Cities", "Artists", "Watchlist", "PriceSnapshots", "ArtistProfiles", "Decision"]
+
+T = TypeVar("T")
 
 
 class Storage:
@@ -85,6 +89,28 @@ class GoogleSheetsStorage(Storage):
     def _refresh(self) -> None:
         self._ss = self._gc.open_by_key(self._spreadsheet_id)
 
+    def _with_retry(self, label: str, fn: Callable[[], T], *, tries: int = 7) -> T:
+        import gspread
+
+        last: Optional[BaseException] = None
+        for attempt in range(tries):
+            try:
+                return fn()
+            except gspread.APIError as exc:
+                last = exc
+                retryable = exc.code in (429, 500, 502, 503) or any(
+                    token in str(exc).lower()
+                    for token in ("quota", "rate limit", "backend error", "timeout")
+                )
+                if not retryable or attempt >= tries - 1:
+                    raise
+                wait = min(60.0, (2 ** attempt) + random.uniform(0.2, 1.5))
+                print(f"[sheets] {label} 限流/瞬时错误，{wait:.1f}s 后重试：{exc}")
+                time.sleep(wait)
+                self._refresh()
+        assert last is not None
+        raise last
+
     def _ws(self, sheet: str):
         import gspread
 
@@ -112,35 +138,58 @@ class GoogleSheetsStorage(Storage):
             return ws
 
     def read_rows(self, sheet: str) -> List[List[str]]:
-        ws = self._ws(sheet)
-        if ws is None:
-            return []
-        return ws.get_all_values()
+        def read():
+            ws = self._ws(sheet)
+            if ws is None:
+                return []
+            return ws.get_all_values()
+
+        return self._with_retry(f"read:{sheet}", read)
 
     def ensure_sheet(self, sheet: str, header: List[str]) -> None:
         if sheet in self._ensured:
             return
-        ws = self._get_or_create(sheet, rows=100, cols=max(len(header), 10))
-        existing = ws.row_values(1)
-        if not existing:
-            ws.append_row(header, value_input_option="RAW")
+
+        def ensure():
+            ws = self._get_or_create(sheet, rows=2000, cols=max(len(header), 10))
+            existing = ws.row_values(1)
+            if not existing:
+                ws.append_row(header, value_input_option="RAW")
+            return True
+
+        self._with_retry(f"header:{sheet}", ensure)
         self._ensured.add(sheet)
 
     def append_rows(self, sheet: str, rows: List[List[str]]) -> None:
         if not rows:
             return
-        ws = self._ws(sheet)
-        if ws is None:
-            raise RuntimeError(f"worksheet 不存在: {sheet}，请先 ensure_sheet")
-        ws.append_rows(rows, value_input_option="RAW")
+
+        def append():
+            ws = self._ws(sheet)
+            if ws is None:
+                raise RuntimeError(f"worksheet 不存在: {sheet}，请先 ensure_sheet")
+            # 预留行数，避免个别环境下 append 触达 grid 上限
+            need = ws.row_count + len(rows) + 10
+            if ws.row_count < need:
+                ws.resize(rows=need)
+            ws.append_rows(rows, value_input_option="RAW")
+            return True
+
+        self._with_retry(f"append:{sheet}", append)
 
     def overwrite(self, sheet: str, rows: List[List[str]]) -> None:
-        ws = self._get_or_create(
-            sheet, rows=max(len(rows) + 5, 20), cols=max(len(rows[0]) if rows else 0, 20)
-        )
-        ws.clear()
-        if rows:
-            ws.update(rows, value_input_option="RAW")
+        def write():
+            ws = self._get_or_create(
+                sheet,
+                rows=max(len(rows) + 50, 100),
+                cols=max(len(rows[0]) if rows else 0, 20),
+            )
+            ws.clear()
+            if rows:
+                ws.update(rows, value_input_option="RAW")
+            return True
+
+        self._with_retry(f"overwrite:{sheet}", write)
 
 
 def get_storage() -> Storage:
