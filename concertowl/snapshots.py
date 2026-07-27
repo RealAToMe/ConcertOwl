@@ -61,11 +61,11 @@ def append_observations(storage: Storage, snaps: Iterable[PriceSnapshot]) -> int
         if snap.observed_price is None and "face_only" not in (snap.note or ""):
             continue
         sheet = artist_price_sheet(snap.artist)
-        storage.ensure_sheet(sheet, SNAPSHOT_HEADER)
         by_artist[sheet].append(snap.as_row(SNAPSHOT_HEADER))
         count += 1
 
     for sheet, rows in by_artist.items():
+        storage.ensure_sheet(sheet, SNAPSHOT_HEADER)
         storage.append_rows(sheet, rows)
         print(f"[snapshot] {sheet} += {len(rows)}")
     return count

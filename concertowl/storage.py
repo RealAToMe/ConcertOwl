@@ -77,14 +77,39 @@ class GoogleSheetsStorage(Storage):
         ]
         info = json.loads(credentials_json)
         creds = Credentials.from_service_account_info(info, scopes=scopes)
+        self._spreadsheet_id = spreadsheet_id
         self._gc = gspread.authorize(creds)
         self._ss = self._gc.open_by_key(spreadsheet_id)
+        self._ensured: set[str] = set()
+
+    def _refresh(self) -> None:
+        self._ss = self._gc.open_by_key(self._spreadsheet_id)
 
     def _ws(self, sheet: str):
+        import gspread
+
         try:
             return self._ss.worksheet(sheet)
-        except Exception:
+        except gspread.WorksheetNotFound:
             return None
+
+    def _get_or_create(self, sheet: str, rows: int, cols: int):
+        import gspread
+
+        ws = self._ws(sheet)
+        if ws is not None:
+            return ws
+        try:
+            return self._ss.add_worksheet(title=sheet, rows=rows, cols=cols)
+        except gspread.APIError as exc:
+            # 限流/缓存导致误判「不存在」时，刷新后再取已有表
+            if "already exists" not in str(exc).lower():
+                raise
+            self._refresh()
+            ws = self._ws(sheet)
+            if ws is None:
+                raise
+            return ws
 
     def read_rows(self, sheet: str) -> List[List[str]]:
         ws = self._ws(sheet)
@@ -93,14 +118,13 @@ class GoogleSheetsStorage(Storage):
         return ws.get_all_values()
 
     def ensure_sheet(self, sheet: str, header: List[str]) -> None:
-        ws = self._ws(sheet)
-        if ws is None:
-            ws = self._ss.add_worksheet(title=sheet, rows=100, cols=max(len(header), 10))
-            ws.append_row(header, value_input_option="RAW")
+        if sheet in self._ensured:
             return
+        ws = self._get_or_create(sheet, rows=100, cols=max(len(header), 10))
         existing = ws.row_values(1)
         if not existing:
             ws.append_row(header, value_input_option="RAW")
+        self._ensured.add(sheet)
 
     def append_rows(self, sheet: str, rows: List[List[str]]) -> None:
         if not rows:
@@ -111,9 +135,9 @@ class GoogleSheetsStorage(Storage):
         ws.append_rows(rows, value_input_option="RAW")
 
     def overwrite(self, sheet: str, rows: List[List[str]]) -> None:
-        ws = self._ws(sheet)
-        if ws is None:
-            ws = self._ss.add_worksheet(title=sheet, rows=max(len(rows) + 5, 20), cols=20)
+        ws = self._get_or_create(
+            sheet, rows=max(len(rows) + 5, 20), cols=max(len(rows[0]) if rows else 0, 20)
+        )
         ws.clear()
         if rows:
             ws.update(rows, value_input_option="RAW")
