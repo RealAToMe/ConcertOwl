@@ -74,6 +74,17 @@ concertowl/
 
 日常只需运行 **collect-prices**：它会先自动发现并更新 `Watchlist`，再采价；仅首次创建空表时才需要 **bootstrap-sheet**。
 
+### 看每场价格走势
+
+Google 表只存原始时序行，**不会自动出折线图**。本地生成可交互看板：
+
+```bash
+# 需已配置 GOOGLE_CREDENTIALS + SHEET_ID（与 Actions 相同）
+python -m concertowl.view_trends
+```
+
+会打开 `data/trends.html`：按歌手 / 场次切换，查看全场最低与票牛分档走势。
+
 > 票牛自动关联只接受同城、日期唯一命中的正常售票活动；代拍费、补款、预定金项目以及歧义候选会跳过。`piaoniu_url` 仍可人工填写，人工值优先且不会被自动发现覆盖。
 
 ## 本地跑通（dry-run，无需任何凭证）

@@ -70,7 +70,7 @@ def append_observations(storage: Storage, snaps: Iterable[PriceSnapshot]) -> int
         storage.append_rows(sheet, rows)
         print(f"[snapshot] {sheet} += {len(rows)}")
         # 多表连续写入时稍作间隔，降低 Google Sheets 写配额触发概率
-        time.sleep(0.4)
+        time.sleep(1.0)
     return count
 
 

@@ -90,13 +90,13 @@ class GoogleSheetsStorage(Storage):
         self._ss = self._gc.open_by_key(self._spreadsheet_id)
 
     def _with_retry(self, label: str, fn: Callable[[], T], *, tries: int = 7) -> T:
-        import gspread
+        from gspread.exceptions import APIError
 
         last: Optional[BaseException] = None
         for attempt in range(tries):
             try:
                 return fn()
-            except gspread.APIError as exc:
+            except APIError as exc:
                 last = exc
                 retryable = exc.code in (429, 500, 502, 503) or any(
                     token in str(exc).lower()
@@ -104,7 +104,10 @@ class GoogleSheetsStorage(Storage):
                 )
                 if not retryable or attempt >= tries - 1:
                     raise
-                wait = min(60.0, (2 ** attempt) + random.uniform(0.2, 1.5))
+                if exc.code == 429 or "quota" in str(exc).lower():
+                    wait = min(120.0, 20.0 * (attempt + 1) + random.uniform(0.5, 2.0))
+                else:
+                    wait = min(60.0, (2 ** attempt) + random.uniform(0.2, 1.5))
                 print(f"[sheets] {label} 限流/瞬时错误，{wait:.1f}s 后重试：{exc}")
                 time.sleep(wait)
                 self._refresh()
@@ -112,22 +115,22 @@ class GoogleSheetsStorage(Storage):
         raise last
 
     def _ws(self, sheet: str):
-        import gspread
+        from gspread.exceptions import WorksheetNotFound
 
         try:
             return self._ss.worksheet(sheet)
-        except gspread.WorksheetNotFound:
+        except WorksheetNotFound:
             return None
 
     def _get_or_create(self, sheet: str, rows: int, cols: int):
-        import gspread
+        from gspread.exceptions import APIError
 
         ws = self._ws(sheet)
         if ws is not None:
             return ws
         try:
             return self._ss.add_worksheet(title=sheet, rows=rows, cols=cols)
-        except gspread.APIError as exc:
+        except APIError as exc:
             # 限流/缓存导致误判「不存在」时，刷新后再取已有表
             if "already exists" not in str(exc).lower():
                 raise
