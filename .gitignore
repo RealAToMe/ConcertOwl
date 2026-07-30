@@ -22,6 +22,14 @@ service_account*.json
 # Local data output (dry-run)
 data/*.csv
 data/*.db
+data/site/
+data/trends*.json
+data/trends*.html
+exports/
+*.xlsx
+
+# Repository data is checked out as a separate worktree
+.data-worktree/
 
 # OS / editor
 .DS_Store

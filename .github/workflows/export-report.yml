@@ -1,0 +1,61 @@
+name: export-excel-report
+
+on:
+  workflow_dispatch:
+    inputs:
+      artist:
+        description: "歌手（留空表示全部）"
+        required: false
+        default: ""
+      start:
+        description: "开始日期 YYYY-MM-DD（可空）"
+        required: false
+        default: ""
+      end:
+        description: "结束日期 YYYY-MM-DD（可空）"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout application
+        uses: actions/checkout@v7
+        with:
+          path: app
+
+      - name: Checkout data
+        uses: actions/checkout@v7
+        with:
+          ref: data
+          path: data-branch
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: app/requirements.txt
+
+      - run: pip install -r app/requirements.txt
+
+      - name: Generate workbook
+        working-directory: app
+        run: >-
+          python -m concertowl.export_excel
+          --data-dir "${{ github.workspace }}/data-branch"
+          --output "${{ github.workspace }}/ConcertOwl_${{ github.run_id }}.xlsx"
+          --artist "${{ inputs.artist }}"
+          --start "${{ inputs.start }}"
+          --end "${{ inputs.end }}"
+
+      - name: Upload workbook
+        uses: actions/upload-artifact@v4
+        with:
+          name: ConcertOwl-Excel-${{ github.run_id }}
+          path: ConcertOwl_${{ github.run_id }}.xlsx
+          retention-days: 30

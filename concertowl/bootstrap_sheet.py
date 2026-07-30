@@ -1,4 +1,4 @@
-"""初始化元数据表，并为每位 active 歌手建「价_歌手」空表。"""
+"""Initialize repository metadata for a new data branch."""
 from __future__ import annotations
 
 from .config import active_artists, load_artists, load_cities
@@ -40,8 +40,11 @@ def main() -> None:
     storage.ensure_sheet("ArtistProfiles", ARTIST_PROFILES_HEADER)
     storage.ensure_sheet("Decision", DECISION_HEADER)
     ensure_artist_price_sheets(storage, [a.name for a in active_artists()])
-    print("[bootstrap] 完成：Cities / Artists / Watchlist / 价_* / ArtistProfiles / Decision")
-    print("[bootstrap] 说明：旧的 PriceSnapshots 大表可手动删除；新观测写入「价_歌手名」。")
+    if hasattr(storage, "data_root"):
+        from .repo_history import rebuild_latest
+
+        rebuild_latest(storage.data_root)
+    print("[bootstrap] 完成：仓库元数据、价格目录与 latest 索引")
 
 
 if __name__ == "__main__":

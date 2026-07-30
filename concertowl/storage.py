@@ -1,23 +1,22 @@
-"""存储后端：Google Sheets（云端）或本地 CSV（dry-run，无需凭证）。
+"""Metadata storage backends.
 
 统一接口：
   - read_rows(sheet)            -> List[List[str]]（含表头）
   - append_rows(sheet, rows)    追加多行
   - ensure_sheet(sheet, header) 确保表存在且有表头
   - overwrite(sheet, rows)      整表覆盖（用于 Decision 刷新）
+
+Production metadata lives under ``CONCERTOWL_DATA_DIR/meta`` on the dedicated
+Git data branch. Price history is handled by :mod:`concertowl.repo_history`.
 """
 from __future__ import annotations
 
 import csv
-import json
 import os
-import random
-import time
-from typing import Callable, List, Optional, TypeVar
+from pathlib import Path
+from typing import List
 
 SHEET_NAMES = ["Cities", "Artists", "Watchlist", "PriceSnapshots", "ArtistProfiles", "Decision"]
-
-T = TypeVar("T")
 
 
 class Storage:
@@ -67,144 +66,68 @@ class LocalCsvStorage(Storage):
         with open(self._path(sheet), "w", encoding="utf-8-sig", newline="") as f:
             csv.writer(f).writerows(rows)
 
+class RepoStorage(LocalCsvStorage):
+    """CSV metadata plus immutable JSONL history on the repository data branch."""
 
-class GoogleSheetsStorage(Storage):
-    """基于 gspread + service account 的 Google Sheets 后端。"""
+    def __init__(self, data_root: str | Path):
+        self.data_root = Path(data_root)
+        super().__init__(str(self.data_root / "meta"))
+        from .repo_history import RepoHistory
 
-    def __init__(self, spreadsheet_id: str, credentials_json: str):
-        import gspread
-        from google.oauth2.service_account import Credentials
+        self.history = RepoHistory(self.data_root)
 
-        scopes = [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive",
-        ]
-        info = json.loads(credentials_json)
-        creds = Credentials.from_service_account_info(info, scopes=scopes)
-        self._spreadsheet_id = spreadsheet_id
-        self._gc = gspread.authorize(creds)
-        self._ss = self._gc.open_by_key(spreadsheet_id)
-        self._ensured: set[str] = set()
+    def append_snapshots(self, snapshots) -> int:
+        return self.history.record(snapshots)
 
-    def _refresh(self) -> None:
-        self._ss = self._gc.open_by_key(self._spreadsheet_id)
+    def finalize_run(self, manifest=None) -> dict:
+        return self.history.finalize(manifest)
 
-    def _with_retry(self, label: str, fn: Callable[[], T], *, tries: int = 7) -> T:
-        from gspread.exceptions import APIError
+    def list_price_sheets(self) -> List[str]:
+        artists = {
+            str(record.get("artist") or "")
+            for record in self.iter_observations()
+            if record.get("artist")
+        }
+        return [f"价_{name}" for name in sorted(artists)]
 
-        last: Optional[BaseException] = None
-        for attempt in range(tries):
-            try:
-                return fn()
-            except APIError as exc:
-                last = exc
-                retryable = exc.code in (429, 500, 502, 503) or any(
-                    token in str(exc).lower()
-                    for token in ("quota", "rate limit", "backend error", "timeout")
-                )
-                if not retryable or attempt >= tries - 1:
-                    raise
-                if exc.code == 429 or "quota" in str(exc).lower():
-                    wait = min(120.0, 20.0 * (attempt + 1) + random.uniform(0.5, 2.0))
-                else:
-                    wait = min(60.0, (2 ** attempt) + random.uniform(0.2, 1.5))
-                print(f"[sheets] {label} 限流/瞬时错误，{wait:.1f}s 后重试：{exc}")
-                time.sleep(wait)
-                self._refresh()
-        assert last is not None
-        raise last
+    def iter_observations(self):
+        from .repo_history import iter_observations
 
-    def _ws(self, sheet: str):
-        from gspread.exceptions import WorksheetNotFound
-
-        try:
-            return self._ss.worksheet(sheet)
-        except WorksheetNotFound:
-            return None
-
-    def _get_or_create(self, sheet: str, rows: int, cols: int):
-        from gspread.exceptions import APIError
-
-        ws = self._ws(sheet)
-        if ws is not None:
-            return ws
-        try:
-            return self._ss.add_worksheet(title=sheet, rows=rows, cols=cols)
-        except APIError as exc:
-            # 限流/缓存导致误判「不存在」时，刷新后再取已有表
-            if "already exists" not in str(exc).lower():
-                raise
-            self._refresh()
-            ws = self._ws(sheet)
-            if ws is None:
-                raise
-            return ws
+        return iter_observations(self.data_root)
 
     def read_rows(self, sheet: str) -> List[List[str]]:
-        def read():
-            ws = self._ws(sheet)
-            if ws is None:
-                return []
-            return ws.get_all_values()
+        if not sheet.startswith("价_"):
+            return super().read_rows(sheet)
 
-        return self._with_retry(f"read:{sheet}", read)
+        from .models import SNAPSHOT_HEADER
+
+        artist = sheet[2:]
+        rows = [SNAPSHOT_HEADER]
+        for record in self.iter_observations():
+            if record.get("artist") != artist:
+                continue
+            rows.append(
+                [
+                    "" if record.get(name) is None else str(record.get(name))
+                    for name in SNAPSHOT_HEADER
+                ]
+            )
+        return rows
 
     def ensure_sheet(self, sheet: str, header: List[str]) -> None:
-        if sheet in self._ensured:
-            return
-
-        def ensure():
-            ws = self._get_or_create(sheet, rows=2000, cols=max(len(header), 10))
-            existing = ws.row_values(1)
-            if not existing:
-                ws.append_row(header, value_input_option="RAW")
-            return True
-
-        self._with_retry(f"header:{sheet}", ensure)
-        self._ensured.add(sheet)
+        if not sheet.startswith("价_"):
+            super().ensure_sheet(sheet, header)
 
     def append_rows(self, sheet: str, rows: List[List[str]]) -> None:
-        if not rows:
-            return
-
-        def append():
-            ws = self._ws(sheet)
-            if ws is None:
-                raise RuntimeError(f"worksheet 不存在: {sheet}，请先 ensure_sheet")
-            # 预留行数，避免个别环境下 append 触达 grid 上限
-            need = ws.row_count + len(rows) + 10
-            if ws.row_count < need:
-                ws.resize(rows=need)
-            ws.append_rows(rows, value_input_option="RAW")
-            return True
-
-        self._with_retry(f"append:{sheet}", append)
-
-    def overwrite(self, sheet: str, rows: List[List[str]]) -> None:
-        def write():
-            ws = self._get_or_create(
-                sheet,
-                rows=max(len(rows) + 50, 100),
-                cols=max(len(rows[0]) if rows else 0, 20),
-            )
-            ws.clear()
-            if rows:
-                ws.update(rows, value_input_option="RAW")
-            return True
-
-        self._with_retry(f"overwrite:{sheet}", write)
+        if sheet.startswith("价_"):
+            raise RuntimeError("价格历史必须通过 append_snapshots 写入")
+        super().append_rows(sheet, rows)
 
 
 def get_storage() -> Storage:
-    """按环境变量选择后端。
-
-    设置 GOOGLE_CREDENTIALS + SHEET_ID -> Google Sheets
-    否则 -> 本地 CSV（dry-run）
-    强制本地：CONCERTOWL_DRYRUN=1
-    """
-    dryrun = os.environ.get("CONCERTOWL_DRYRUN") == "1"
-    creds = os.environ.get("GOOGLE_CREDENTIALS")
-    sheet_id = os.environ.get("SHEET_ID")
-    if not dryrun and creds and sheet_id:
-        return GoogleSheetsStorage(sheet_id, creds)
-    return LocalCsvStorage()
+    """Use repository storage in production and local CSV for dry runs."""
+    data_dir = os.environ.get("CONCERTOWL_DATA_DIR", "").strip()
+    if data_dir and os.environ.get("CONCERTOWL_DRYRUN") != "1":
+        return RepoStorage(data_dir)
+    local_dir = os.environ.get("CONCERTOWL_LOCAL_DATA_DIR", "data")
+    return LocalCsvStorage(local_dir)

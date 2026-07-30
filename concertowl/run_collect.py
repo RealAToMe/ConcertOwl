@@ -1,6 +1,7 @@
 """采集主入口：读 Watchlist -> 各采集器 -> 按歌手分表追加时序观测。"""
 from __future__ import annotations
 
+from collections import defaultdict
 from typing import List
 
 from .collectors import all_collectors
@@ -18,15 +19,25 @@ def run() -> int:
 
     if not events:
         print("[collect] Watchlist 为空或无在范围内的场次，未采集。")
+        finalize = getattr(storage, "finalize_run", None)
+        if finalize:
+            finalize(
+                {
+                    "status": "empty",
+                    "events_total": 0,
+                    "skipped": skipped,
+                    "sources": {},
+                }
+            )
         return 0
 
     collectors = all_collectors()
-    # 按歌手顺序采并即时落表，避免最后一次性打满 Sheets 写配额
     events = sorted(events, key=lambda e: (e.artist or "", e.city or "", e.event_id))
     pending: List[PriceSnapshot] = []
     current_artist = None
     written = 0
     write_errors: List[str] = []
+    source_stats = defaultdict(lambda: {"attempted": 0, "snapshots": 0, "empty": 0, "errors": 0})
 
     def flush() -> None:
         nonlocal pending, written
@@ -51,7 +62,13 @@ def run() -> int:
             print(f"[warn] {ev.event_id} 无匹配采集器（检查 official_url/secondary_url）")
             continue
         for c in matched:
+            source_stats[c.source]["attempted"] += 1
             snaps = c.collect(ev)
+            source_stats[c.source]["snapshots"] += len(snaps)
+            if c.last_error:
+                source_stats[c.source]["errors"] += 1
+            elif not snaps:
+                source_stats[c.source]["empty"] += 1
             pending.extend(snaps)
             for s in snaps:
                 price = s.observed_price if s.observed_price is not None else "-"
@@ -61,7 +78,26 @@ def run() -> int:
                 )
 
     flush()
-    print(f"[collect] 完成：{len(events)} 场，写入 {written} 条时序观测。")
+    manifest = {
+        "status": "failed" if write_errors else (
+            "partial"
+            if any(stats["errors"] for stats in source_stats.values())
+            else "success"
+        ),
+        "events_total": len(events),
+        "skipped": skipped,
+        "sources": dict(source_stats),
+        "write_errors": write_errors,
+    }
+    finalize = getattr(storage, "finalize_run", None)
+    if finalize:
+        result = finalize(manifest)
+        written = int(result.get("records_written", written))
+        print(
+            f"[collect] 批次 {result.get('run_id')}：变化 {result.get('changes', 0)}，"
+            f"心跳 {result.get('heartbeats', 0)}，未变 {result.get('unchanged', 0)}"
+        )
+    print(f"[collect] 完成：{len(events)} 场，持久化 {written} 条时序观测。")
     if write_errors:
         print(f"[collect] 有 {len(write_errors)} 次写表错误")
         return 1

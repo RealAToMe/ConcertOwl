@@ -29,6 +29,7 @@ class Collector:
         self._session = requests.Session()
         self._session.headers.update(DEFAULT_HEADERS)
         self._last_request = 0.0
+        self.last_error: str = ""
 
     def _throttle(self) -> None:
         elapsed = time.time() - self._last_request
@@ -58,11 +59,13 @@ class Collector:
         raise NotImplementedError
 
     def collect(self, event: WatchEvent) -> List[PriceSnapshot]:
+        self.last_error = ""
         try:
             return self.fetch(event)
         except Exception as exc:
             # 错误不写时序（无价格），只打日志用空列表；需要痕迹时由调用方打印
-            print(f"[collect][{self.source}] ERROR {event.event_id}: {type(exc).__name__}: {exc}")
+            self.last_error = f"{type(exc).__name__}: {exc}"
+            print(f"[collect][{self.source}] ERROR {event.event_id}: {self.last_error}")
             return []
 
     def observation(

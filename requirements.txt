@@ -3,5 +3,5 @@ beautifulsoup4>=4.12
 lxml>=5.0
 PyYAML>=6.0
 python-dateutil>=2.9
-gspread>=6.0
-google-auth>=2.30
+openpyxl>=3.1
+pytest>=8.4

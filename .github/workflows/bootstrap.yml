@@ -1,22 +1,62 @@
-name: bootstrap-sheet
+name: bootstrap-data-branch
 
-# 手动触发一次：把 Cities/Artists 白名单与各表头写进 Google Sheet。
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout application
+        uses: actions/checkout@v7
+        with:
+          path: app
+          fetch-depth: 0
+
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -r requirements.txt
-      - name: Bootstrap sheets
+          cache-dependency-path: app/requirements.txt
+
+      - run: pip install -r app/requirements.txt
+
+      - name: Prepare data worktree
+        shell: bash
+        run: |
+          if git -C app ls-remote --exit-code --heads origin data; then
+            git -C app fetch origin data
+            git -C app worktree add "${GITHUB_WORKSPACE}/data-branch" origin/data
+          else
+            mkdir "${GITHUB_WORKSPACE}/data-branch"
+            git -C "${GITHUB_WORKSPACE}/data-branch" init
+            git -C "${GITHUB_WORKSPACE}/data-branch" switch --orphan data
+            git -C "${GITHUB_WORKSPACE}/data-branch" remote add origin \
+              "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          fi
+
+      - name: Bootstrap repository metadata
+        working-directory: app
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          SHEET_ID: ${{ secrets.SHEET_ID }}
+          CONCERTOWL_DATA_DIR: ${{ github.workspace }}/data-branch
         run: python -m concertowl.bootstrap_sheet
+
+      - name: Commit data branch
+        shell: bash
+        working-directory: data-branch
+        run: |
+          mkdir -p prices runs site
+          touch prices/.gitkeep runs/.gitkeep site/.gitkeep
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add meta prices runs site
+          if git diff --cached --quiet; then
+            echo "Data branch already initialized"
+            exit 0
+          fi
+          git commit -m "data: initialize repository storage"
+          git push origin HEAD:data

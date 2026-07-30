@@ -1,7 +1,6 @@
 """按时序追加价格观测到「按歌手分表」。"""
 from __future__ import annotations
 
-import time
 from collections import defaultdict
 from typing import Dict, Iterable, List, Optional
 
@@ -52,10 +51,17 @@ def build_observation(
 
 
 def append_observations(storage: Storage, snaps: Iterable[PriceSnapshot]) -> int:
-    """按 artist 分表追加；自动 ensure 表头。返回写入行数。"""
+    """Append observations to repository history or legacy local CSV."""
+    snapshots = list(snaps)
+    append_snapshots = getattr(storage, "append_snapshots", None)
+    if append_snapshots is not None:
+        written = append_snapshots(snapshots)
+        print(f"[snapshot] 仓库批次暂存 {written}/{len(snapshots)} 条变化/心跳")
+        return written
+
     by_artist: Dict[str, List[List[str]]] = defaultdict(list)
     count = 0
-    for snap in snaps:
+    for snap in snapshots:
         if not snap.artist:
             continue
         # 没有观测价的行对时序分析价值低，默认跳过（除非 note 标明 face_only）
@@ -69,8 +75,6 @@ def append_observations(storage: Storage, snaps: Iterable[PriceSnapshot]) -> int
         storage.ensure_sheet(sheet, SNAPSHOT_HEADER)
         storage.append_rows(sheet, rows)
         print(f"[snapshot] {sheet} += {len(rows)}")
-        # 多表连续写入时稍作间隔，降低 Google Sheets 写配额触发概率
-        time.sleep(1.0)
     return count
 
 
