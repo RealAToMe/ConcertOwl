@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import webbrowser
 from collections import defaultdict
@@ -16,12 +17,44 @@ from .repo_history import (
 )
 
 
+def _watchlist_metadata(data_root: Path | str) -> dict[str, dict[str, str]]:
+    """Load canonical event labels used to reject cross-session observations."""
+    path = Path(data_root) / "meta" / "Watchlist.csv"
+    if not path.exists():
+        return {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = csv.DictReader(handle)
+        return {
+            str(row.get("event_id") or ""): {
+                "artist": str(row.get("artist") or ""),
+                "city": str(row.get("city") or ""),
+                "tour": str(row.get("tour") or ""),
+                "show": str(row.get("show_datetime") or "")[:16],
+            }
+            for row in rows
+            if row.get("event_id")
+        }
+
+
 def build_payload(data_root: Path | str) -> dict:
     events: dict[str, dict] = {}
+    metadata = _watchlist_metadata(data_root)
     for row in iter_observations(data_root):
         event_id = str(row.get("event_id") or "")
         observed_at = str(row.get("observed_at") or "")[:16]
         if not event_id or not observed_at or row.get("observed_price") is None:
+            continue
+        canonical = metadata.get(event_id, {})
+        canonical_show = str(canonical.get("show") or "")
+        observed_show = str(row.get("show_datetime") or "")
+        if (
+            canonical_show[:10]
+            and observed_show[:10]
+            and canonical_show[:10] != observed_show[:10]
+        ):
+            # A Piaoniu activity may contain several sessions. Older collectors
+            # wrote every session under each linked Watchlist event; those rows
+            # must not leak into a different date's chart.
             continue
         try:
             observed_price = float(row["observed_price"])
@@ -45,10 +78,10 @@ def build_payload(data_root: Path | str) -> dict:
             event_id,
             {
                 "id": event_id,
-                "artist": row.get("artist") or "",
-                "city": row.get("city") or "",
-                "tour": row.get("tour") or "",
-                "show": str(row.get("show_datetime") or "")[:16],
+                "artist": canonical.get("artist") or row.get("artist") or "",
+                "city": canonical.get("city") or row.get("city") or "",
+                "tour": canonical.get("tour") or row.get("tour") or "",
+                "show": canonical_show or str(row.get("show_datetime") or "")[:16],
                 "sources": set(),
                 "series": defaultdict(dict),
             },
@@ -157,8 +190,8 @@ table{{width:100%;border-collapse:collapse}} td,th{{text-align:left;padding:8px;
 <section class="card">
  <h2>单场走势</h2>
  <div class="controls">
-  <label>歌手<select id="artist"></select></label>
-  <label>场次<select id="event"></select></label>
+  <label>歌手<select id="artist" autocomplete="off"></select></label>
+  <label>场次<select id="event" autocomplete="off"></select></label>
  </div>
  <h2 id="title" style="margin-top:18px"></h2>
  <div class="muted" id="summary"></div>
@@ -173,22 +206,34 @@ table{{width:100%;border-collapse:collapse}} td,th{{text-align:left;padding:8px;
 const DATA={data}; let chart;
 const artist=document.querySelector("#artist"), eventSel=document.querySelector("#event");
 const eventList=()=>DATA.events.filter(e=>e.artist===artist.value);
-function fillArtists(){{
+function fillArtists(preferredArtist=artist.value,preferredEvent=eventSel.value){{
  artist.innerHTML=DATA.artists.map(a=>`<option>${{a}}</option>`).join("");
- fillEvents();
+ artist.value=DATA.artists.includes(preferredArtist)?preferredArtist:(DATA.artists[0]||"");
+ fillEvents(preferredEvent);
 }}
-function fillEvents(){{
- eventSel.innerHTML=eventList().map(e=>`<option value="${{e.id}}">${{e.city}} · ${{e.show.slice(0,10)}} · ${{e.delta_pct>=0?"+":""}}${{e.delta_pct}}%</option>`).join("");
+function fillEvents(preferredEvent=eventSel.value){{
+ const events=eventList();
+ eventSel.innerHTML=events.map(e=>`<option value="${{e.id}}">${{e.city}} · ${{e.show.slice(0,10)}} · ${{e.delta_pct>=0?"+":""}}${{e.delta_pct}}%</option>`).join("");
+ eventSel.value=events.some(e=>e.id===preferredEvent)?preferredEvent:(events[0]?.id||"");
  render();
 }}
 function render(){{
- const e=eventList().find(x=>x.id===eventSel.value)||eventList()[0]; if(!e)return;
+ const events=eventList(), e=events.find(x=>x.id===eventSel.value)||events[0];
+ if(!e){{
+  document.querySelector("#title").textContent="";
+  document.querySelector("#summary").textContent="";
+  if(chart){{chart.destroy();chart=undefined}}
+  return;
+ }}
+ eventSel.value=e.id;
  document.querySelector("#title").textContent=e.label+" — "+e.tour;
  document.querySelector("#summary").textContent=`首价 ${{e.first}} · 最新 ${{e.last}} · 变化 ${{e.delta>=0?"+":""}}${{e.delta}} (${{e.delta_pct}}%) · ${{e.points}} 个时点 · ${{e.sources.join(" / ")}}`;
  if(chart)chart.destroy();
  chart=new Chart(document.querySelector("#chart"),{{type:"line",data:{{labels:e.categories,datasets:e.series.map(s=>({{label:s.name,data:s.data,tension:.2,borderWidth:2,pointRadius:2}}))}},options:{{responsive:true,interaction:{{mode:"index",intersect:false}},scales:{{y:{{title:{{display:true,text:"挂牌价（元）"}}}},x:{{title:{{display:true,text:"观测时间"}}}}}},plugins:{{legend:{{position:"bottom"}}}}}}}});
 }}
-artist.addEventListener("change",fillEvents); eventSel.addEventListener("change",render); fillArtists();
+artist.addEventListener("change",()=>fillEvents("")); eventSel.addEventListener("change",render);
+fillArtists();
+window.addEventListener("pageshow",()=>fillArtists(artist.value,eventSel.value));
 const latest=DATA.runs[0]; if(latest){{
  const ok=["success","partial"].includes(latest.status);
  document.querySelector("#lastStatus").innerHTML=`<span class="${{ok?"ok":"bad"}}">${{latest.status}}</span>`;
