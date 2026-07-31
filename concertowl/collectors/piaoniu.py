@@ -34,8 +34,8 @@ class PiaoniuCollector(Collector):
 
     def __init__(self, min_interval: float = 1.2, timeout: float = 15.0):
         super().__init__(min_interval=min_interval, timeout=timeout)
-        self._activity_cache: dict[str, dict | None] = {}
-        self._categories_cache: dict[str, list | None] = {}
+        self._activity_cache: dict[str, dict] = {}
+        self._categories_cache: dict[str, list] = {}
         self._session.headers.update(
             {
                 "Accept": "application/json, text/plain, */*",
@@ -67,10 +67,10 @@ class PiaoniuCollector(Collector):
     def _activity(self, activity_id: str) -> dict | None:
         if activity_id not in self._activity_cache:
             payload = self._json(f"/api/v1/activities/{activity_id}.json")
-            self._activity_cache[activity_id] = (
-                payload if isinstance(payload, dict) else None
-            )
-        return self._activity_cache[activity_id]
+            if not isinstance(payload, dict):
+                return None
+            self._activity_cache[activity_id] = payload
+        return self._activity_cache.get(activity_id)
 
     def _categories(self, event_id: str) -> list | None:
         if event_id not in self._categories_cache:
@@ -78,10 +78,10 @@ class PiaoniuCollector(Collector):
                 "/api/v1/ticketCategories.json",
                 params={"b2c": "true", "eventId": event_id},
             )
-            self._categories_cache[event_id] = (
-                payload if isinstance(payload, list) else None
-            )
-        return self._categories_cache[event_id]
+            if not isinstance(payload, list):
+                return None
+            self._categories_cache[event_id] = payload
+        return self._categories_cache.get(event_id)
 
     @staticmethod
     def _matching_sessions(event: WatchEvent, sessions: list) -> list:
