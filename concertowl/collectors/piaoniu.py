@@ -34,6 +34,8 @@ class PiaoniuCollector(Collector):
 
     def __init__(self, min_interval: float = 1.2, timeout: float = 15.0):
         super().__init__(min_interval=min_interval, timeout=timeout)
+        self._activity_cache: dict[str, dict | None] = {}
+        self._categories_cache: dict[str, list | None] = {}
         self._session.headers.update(
             {
                 "Accept": "application/json, text/plain, */*",
@@ -62,24 +64,57 @@ class PiaoniuCollector(Collector):
         except ValueError:
             return None
 
+    def _activity(self, activity_id: str) -> dict | None:
+        if activity_id not in self._activity_cache:
+            payload = self._json(f"/api/v1/activities/{activity_id}.json")
+            self._activity_cache[activity_id] = (
+                payload if isinstance(payload, dict) else None
+            )
+        return self._activity_cache[activity_id]
+
+    def _categories(self, event_id: str) -> list | None:
+        if event_id not in self._categories_cache:
+            payload = self._json(
+                "/api/v1/ticketCategories.json",
+                params={"b2c": "true", "eventId": event_id},
+            )
+            self._categories_cache[event_id] = (
+                payload if isinstance(payload, list) else None
+            )
+        return self._categories_cache[event_id]
+
+    @staticmethod
+    def _matching_sessions(event: WatchEvent, sessions: list) -> list:
+        """Select only the Piaoniu session represented by this Watchlist event."""
+        valid = [session for session in sessions if session.get("id")]
+        target_date = (event.show_datetime or "")[:10]
+        if target_date:
+            return [
+                session
+                for session in valid
+                if _timestamp_iso(
+                    session.get("start") or session.get("defaultStart")
+                )[:10]
+                == target_date
+            ]
+        # A manually linked single-session activity is unambiguous even if the
+        # Watchlist row has no date. Multi-session activities must not be merged.
+        return valid if len(valid) == 1 else []
+
     def fetch(self, event: WatchEvent) -> List[PriceSnapshot]:
         activity_id = self._activity_id(event)
         if not activity_id:
             return []
-        activity = self._json(f"/api/v1/activities/{activity_id}.json")
-        if not isinstance(activity, dict):
+        activity = self._activity(activity_id)
+        if activity is None:
             return []
 
         out: List[PriceSnapshot] = []
-        for session in activity.get("events") or []:
-            event_id = session.get("id")
-            if not event_id:
-                continue
-            categories = self._json(
-                "/api/v1/ticketCategories.json",
-                params={"b2c": "true", "eventId": event_id},
-            )
-            if not isinstance(categories, list):
+        sessions = self._matching_sessions(event, activity.get("events") or [])
+        for session in sessions:
+            event_id = str(session["id"])
+            categories = self._categories(event_id)
+            if categories is None:
                 continue
             session_event = replace(
                 event,
