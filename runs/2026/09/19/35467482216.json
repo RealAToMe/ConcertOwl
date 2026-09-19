@@ -1,0 +1,29 @@
+{
+  "changes": 140,
+  "completed_at": "2026-09-19T20:38:04",
+  "events_total": 138,
+  "heartbeats": 0,
+  "observation_file": "prices/2026/09/19/35467482216.jsonl",
+  "records_seen": 851,
+  "records_written": 140,
+  "run_id": "35467482216",
+  "skipped": [],
+  "sources": {
+    "moretickets": {
+      "attempted": 138,
+      "empty": 15,
+      "errors": 0,
+      "snapshots": 123
+    },
+    "piaoniu": {
+      "attempted": 110,
+      "empty": 52,
+      "errors": 0,
+      "snapshots": 787
+    }
+  },
+  "started_at": "2026-09-19T20:31:14",
+  "status": "success",
+  "unchanged": 711,
+  "write_errors": []
+}
