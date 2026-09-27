@@ -31,18 +31,18 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d8e780973640001bf52fe",
       "face_price": null,
-      "fingerprint": "d8fc3d72fa3b18ec13b9",
+      "fingerprint": "dae1cf300f12b0f357c8",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "004aaa48442012487f0baf19": {
       "artist": "陈粒",
       "event_id": "mtl_6aa36d85b7f251000139cc82",
       "face_price": null,
-      "fingerprint": "b1dc77ef41b5e4e5a1cd",
+      "fingerprint": "a5cb037051d278f9e137",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:13:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "004f1ca9f1a4c670ae3b06de": {
@@ -130,9 +130,9 @@
       "artist": "张杰",
       "event_id": "mtl_6a9f933e87b6690001570e8a",
       "face_price": null,
-      "fingerprint": "20c868dc2468a5924fcf",
+      "fingerprint": "951c17e4ebb4e5e19210",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "00e34ba4f1bc776485ce8723": {
@@ -157,9 +157,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a6ad2c9484642000185b635",
       "face_price": 899.0,
-      "fingerprint": "12c4036db0ed00d39326",
+      "fingerprint": "d5fdf810eacb12bd1973",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "016bf2b5f4ce7af73e837e8a": {
@@ -274,9 +274,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_69c6615b20b2aa000192e18f",
       "face_price": null,
-      "fingerprint": "944ee5ad7235150190de",
+      "fingerprint": "fa2400aa7b2d24136129",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "02601def616215f0b8b6d012": {
@@ -679,9 +679,9 @@
       "artist": "陈粒",
       "event_id": "mtl_6a8e9ba1923a6600014d0ef3",
       "face_price": 799.0,
-      "fingerprint": "0536f632a3e36b9052a1",
+      "fingerprint": "bff8b82987ee0f4c6e93",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:02:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "061a2248f613e4e06c3c5c45": {
@@ -715,18 +715,18 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 380.0,
-      "fingerprint": "80148786523efee11d11",
+      "fingerprint": "2400027b1eb9a7f383f5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "065a3489ba8c42b7a9d03499": {
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 880.0,
-      "fingerprint": "7734b8a909fc32da646b",
+      "fingerprint": "6852c95064be9e286ab6",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "0668c8a871d0f81067825da6": {
@@ -913,9 +913,9 @@
       "artist": "张杰",
       "event_id": "mtl_6a9f933e87b6690001570e8a",
       "face_price": 1.0,
-      "fingerprint": "3e2d4ee818deb9f2653e",
+      "fingerprint": "99395d2156864db1e32c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "piaoniu"
     },
     "082d0fb2e972bd0df400727a": {
@@ -1120,9 +1120,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "bd91a36a2ce57b4370fe",
+      "fingerprint": "e61e0482830f3222d8cb",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "09b148288044d47e5f1e84a8": {
@@ -1237,9 +1237,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 917.0,
-      "fingerprint": "ed221b99fd20860e0260",
+      "fingerprint": "6a71d29279cea3d9cf32",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "0a8f2958c9ad24d663a722e2": {
@@ -1255,9 +1255,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1317.0,
-      "fingerprint": "dcaab97d242d105fbfab",
+      "fingerprint": "e0945b970c9780f55539",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "0ab6634e3f54e8611d11cd28": {
@@ -1471,18 +1471,18 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6a966c84eeed7d00010ce9af",
       "face_price": null,
-      "fingerprint": "dd89fc33a0444959293a",
+      "fingerprint": "84c86403c84b9e763c5b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "0cf0447d6ca4b82db643e8d9": {
       "artist": "郑秀文",
       "event_id": "mtl_69cb5db6bb7a4a0001c416c2",
       "face_price": null,
-      "fingerprint": "c16f996271753de68dca",
+      "fingerprint": "f3e7969270938b574703",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "0d0eee13eba8a713c0946f04": {
@@ -1570,9 +1570,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "baebd449484015d62263",
-      "heartbeat_date": "2026-09-23",
-      "observed_at": "2026-09-23T04:39:00",
+      "fingerprint": "67a01295c99ca4a02f93",
+      "heartbeat_date": "2026-09-27",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "0df2041e570804591c940d98": {
@@ -1588,9 +1588,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a72db46b2c6b200015160d5",
       "face_price": null,
-      "fingerprint": "00436fbe158f48c0d3c1",
+      "fingerprint": "c42d79e02168215b371a",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "motianlun_cn"
     },
     "0e004b9d54b8eb451f136591": {
@@ -1723,9 +1723,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 680.0,
-      "fingerprint": "41715f2fb1b18bca8040",
+      "fingerprint": "9bbf376cd3d00d820627",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "0f3e335a4a3d9a5c129b7293": {
@@ -1804,9 +1804,9 @@
       "artist": "单依纯",
       "event_id": "mtl_6ab2181faa859c0001f73635",
       "face_price": 1880.0,
-      "fingerprint": "79daa14c80705a49df3d",
+      "fingerprint": "e07a1e37d82921f0fb43",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "103ee335b9f12598e1da3cc2": {
@@ -1840,9 +1840,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "5cba2381d37a58e6306e",
+      "fingerprint": "fe2e25e68b9224dd712c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "109782feaf9629993e06f8b1": {
@@ -2128,9 +2128,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 717.0,
-      "fingerprint": "ded2b2261e16c8fdd8f9",
+      "fingerprint": "cb2e44cf186032139cc3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "13b946353cdb95a1be5f2ea9": {
@@ -2218,9 +2218,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a6c4df63fb6230001fba560",
       "face_price": 880.0,
-      "fingerprint": "db15f30827a58f98d902",
+      "fingerprint": "9a04387630acae6bf632",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "14d265218bfba7fc369629cd": {
@@ -2389,9 +2389,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6a966c84eeed7d00010ce9af",
       "face_price": 798.0,
-      "fingerprint": "e3897dc9b1e9433ff911",
+      "fingerprint": "0f4bf88182295b5b697c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:58:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "1667fe56171642cf7a6fefdf": {
@@ -2587,9 +2587,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1680.0,
-      "fingerprint": "c3da09952b576b000c3c",
+      "fingerprint": "864b8f894ede7253be7f",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "18f8b8be0650847702903367": {
@@ -2803,9 +2803,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "b933681cfe598fda8f86",
+      "fingerprint": "7a48a2be9b20ab965a3d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "1a735301d867b3cd998ef4e7": {
@@ -2920,9 +2920,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a9e549377faf70001e520fe",
       "face_price": 780.0,
-      "fingerprint": "0303d9cf0176201bbde6",
+      "fingerprint": "5e70e0cfa66bc5fa1f4c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "1b3ac10740a2a200d38f5a8a": {
@@ -3109,9 +3109,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a6ac86e0ac7750001aa33dc",
       "face_price": 980.0,
-      "fingerprint": "ee7723fdf49fbe09f7ed",
+      "fingerprint": "f1b0bdcf72ef936707c3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "1d2207ad14e92b34928b39eb": {
@@ -3217,9 +3217,9 @@
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 780.0,
-      "fingerprint": "61f9622ef4c018b6f398",
+      "fingerprint": "14bba20024919d2956c1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "1e1cb1e826ab018b2d88e265": {
@@ -3244,9 +3244,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 717.0,
-      "fingerprint": "ded2b2261e16c8fdd8f9",
+      "fingerprint": "cb2e44cf186032139cc3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "1e5b2bf98b20fbae02c76e34": {
@@ -3487,9 +3487,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "984b13e79efcbb8ba62f",
+      "fingerprint": "5d7076c8121b1e1c27d4",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "202b776a211cad65255201f0": {
@@ -3505,9 +3505,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1280.0,
-      "fingerprint": "e12e0054d9ec9fcbe515",
+      "fingerprint": "98a0ad8834b6336be7da",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "20451f2ebcc180c1b1cb2441": {
@@ -3775,9 +3775,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 1118.0,
-      "fingerprint": "b49a163a45c23aa1b089",
+      "fingerprint": "b9b16c403a7da475ee2d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "22af8b8a1edb9b90679a8784": {
@@ -3838,9 +3838,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 1517.0,
-      "fingerprint": "bce339e25c957a75d482",
+      "fingerprint": "2b6262e2454ea383e910",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "231edf497308b9342b4a1ee9": {
@@ -3865,9 +3865,9 @@
       "artist": "周深",
       "event_id": "mtl_6aaf7f509fe2410001a7cdb9",
       "face_price": null,
-      "fingerprint": "b8d05a0041a55aa7efae",
+      "fingerprint": "0d01b7e859c6dff585e5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "motianlun_cn"
     },
     "2347a7095d1fe3fc5dc3a590": {
@@ -3901,18 +3901,18 @@
       "artist": "周杰伦",
       "event_id": "mtl_69f088a2300f6f000101d62c",
       "face_price": null,
-      "fingerprint": "0788e88856ca1bd98422",
+      "fingerprint": "be57501069906885afe5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "motianlun_cn"
     },
     "23a2470322ca3d684d7ddd2b": {
       "artist": "林宥嘉",
       "event_id": "mtl_6a6c4df63fb6230001fba560",
       "face_price": 1280.0,
-      "fingerprint": "6639889f701ddad4dd8c",
+      "fingerprint": "153ac9ff168f2ca7379c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "23a2b22d1736475f6763a97f": {
@@ -3946,9 +3946,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "4f39768401655c933c35",
+      "fingerprint": "b3cbb1e74ada4129694e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "23f534b3570e0162ef18379b": {
@@ -4018,9 +4018,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 818.0,
-      "fingerprint": "5ba9839b57c842eb77a5",
+      "fingerprint": "43ab69f930a2fab3a729",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "25248566567ac25635eaacd4": {
@@ -4135,9 +4135,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 1517.0,
-      "fingerprint": "7f81f99fb07ef4c80048",
+      "fingerprint": "2b6262e2454ea383e910",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "2651c66527f196f1a249d986": {
@@ -4261,9 +4261,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "621714617a17f4ded642",
-      "heartbeat_date": "2026-09-23",
-      "observed_at": "2026-09-23T04:39:00",
+      "fingerprint": "67a01295c99ca4a02f93",
+      "heartbeat_date": "2026-09-27",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "276c5fab49bf33198c6cead6": {
@@ -4360,9 +4360,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "36f2228103a7d04231a8",
+      "fingerprint": "2a723cc79251fa096ef0",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "28caeef44830f332fdefebad": {
@@ -4378,9 +4378,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "32e6f3f189bb92924ff9",
+      "fingerprint": "ca43b6803fa9fa15e112",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "28de9688d5ea6c7fe0c07e9a": {
@@ -4486,9 +4486,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 1118.0,
-      "fingerprint": "b49a163a45c23aa1b089",
+      "fingerprint": "01d4c2c0e4401ee18060",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "29c2292c6d5ec9fe8701ca66": {
@@ -4504,9 +4504,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "ca43b6803fa9fa15e112",
+      "fingerprint": "f55da5e8733faf488264",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "2a02217621d4094c999bd5c7": {
@@ -4522,9 +4522,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a9e549377faf70001e520fe",
       "face_price": null,
-      "fingerprint": "c861780ea4a5caf31dd3",
+      "fingerprint": "251117c7ac748d3b5c91",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "2a37f6aa7b5eb47eaf6c3912": {
@@ -4603,9 +4603,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1380.0,
-      "fingerprint": "71e55eb856ed61874ed7",
+      "fingerprint": "88988c1a7ae3d42f1423",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "2b148b7d5b86df68c25e1bcb": {
@@ -4738,9 +4738,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1380.0,
-      "fingerprint": "0b1b27a486d5797e3c56",
+      "fingerprint": "7315637cd4a6dc8324b6",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "2bc473a2176a74a39d0f79cc": {
@@ -4774,9 +4774,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 818.0,
-      "fingerprint": "c2307354b2a4d75e1c79",
+      "fingerprint": "48542a81d341c2c5c4bf",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "2c12a5324ff4c4eb39cb71e5": {
@@ -4873,18 +4873,18 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a770001514d950001698ad4",
       "face_price": null,
-      "fingerprint": "0ae3eb2e106afff065ae",
+      "fingerprint": "618989d1d8f7d69e4289",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "2cbf2ae4940aaf45b98f0622": {
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 880.0,
-      "fingerprint": "64c46374f95823476d53",
+      "fingerprint": "4f205385a3f73e956f1d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "2ccf801bc3b2836b4390c235": {
@@ -4999,9 +4999,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1317.0,
-      "fingerprint": "b1132da3a579d01e2810",
+      "fingerprint": "e0945b970c9780f55539",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "2de7aabf0ecf04493b2a2b0e": {
@@ -5062,9 +5062,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 480.0,
-      "fingerprint": "76c3f7702a2e72eefc40",
+      "fingerprint": "ddf820b58f378b333a7c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "2e759fc561e5924c0fcb83ca": {
@@ -5314,9 +5314,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a6ad2c9484642000185b635",
       "face_price": 1.0,
-      "fingerprint": "a0bdbe2e52a297fb996e",
+      "fingerprint": "536a4a469739ce60cc9d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "311b0cb05c3d6c5074a3b721": {
@@ -5467,9 +5467,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 618.0,
-      "fingerprint": "05d2e01b768d919631a2",
+      "fingerprint": "5eeb87071cde9f17197e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "32b5ec0420539444d3cbffd5": {
@@ -5737,9 +5737,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 917.0,
-      "fingerprint": "c22c4ce4e2a883392419",
+      "fingerprint": "6d7e9c6b028e5d1ed039",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "360ac020d27d06a4c4872a28": {
@@ -6142,9 +6142,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 380.0,
-      "fingerprint": "d59370aa1ef2790f4144",
+      "fingerprint": "951c17e4ebb4e5e19210",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "39754b9bbb1e3650f4c1da76": {
@@ -6259,9 +6259,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1080.0,
-      "fingerprint": "c30842e4366e0b95dfef",
+      "fingerprint": "cccddfdbe275a37bd9b5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "3a47c232238d504c801c3213": {
@@ -6340,9 +6340,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "c0755167aaf476d31d84",
+      "fingerprint": "68bc2e7edf0420f84e27",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "3b2f48c75252719529b8b16f": {
@@ -6376,9 +6376,9 @@
       "artist": "陈粒",
       "event_id": "mtl_6a8e9ba1923a6600014d0ef3",
       "face_price": 599.0,
-      "fingerprint": "389e898a5953df3ba1c4",
+      "fingerprint": "dce592c84fbca0d27454",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:02:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "3bc54cf288241038fac8fee5": {
@@ -6628,18 +6628,18 @@
       "artist": "周深",
       "event_id": "mtl_6a45d3cb57a4330001c01d3f",
       "face_price": null,
-      "fingerprint": "4470009117b8ad236d59",
+      "fingerprint": "89897f69bfda1b6bd074",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "3e9ba91149b9c673dd8a86df": {
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 1680.0,
-      "fingerprint": "e7a92be0480190d68bb4",
+      "fingerprint": "325e0481309b37b63db4",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "3e9d31295ce5c482c23ea483": {
@@ -6871,9 +6871,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 1618.0,
-      "fingerprint": "6bf25bb3b11574cd8b46",
+      "fingerprint": "98f21001d4f9cab95052",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "41343f56a9d2aae13311ed7e": {
@@ -6988,9 +6988,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "7764d29170aff805dbe3",
+      "fingerprint": "46684df93aef018767e2",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "4212d4947b63e915da63f993": {
@@ -7042,9 +7042,9 @@
       "artist": "孙燕姿",
       "event_id": "mtl_69eb1649ca341400013c6d48",
       "face_price": null,
-      "fingerprint": "f6e793204e4ef027eae5",
+      "fingerprint": "0cc4f0888a340392f076",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:57:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "42c0b518f0e695b755191304": {
@@ -7069,9 +7069,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a6c4df63fb6230001fba560",
       "face_price": 1280.0,
-      "fingerprint": "1cebbd69127a99c6443f",
+      "fingerprint": "f3e7969270938b574703",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:58:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "42f7e11358d5999ae76e530a": {
@@ -7204,18 +7204,18 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 680.0,
-      "fingerprint": "c75598a63791b7bfe02c",
+      "fingerprint": "da67949609f89d62c67b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "447de9f2688f478c1caf0147": {
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 980.0,
-      "fingerprint": "56ef372ccf6cd8df8f89",
+      "fingerprint": "199ef1c8b68ab561b0b9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "448aec01f506c99ad8343f07": {
@@ -7708,18 +7708,18 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d91980973640001c074d2",
       "face_price": null,
-      "fingerprint": "34160e8e3a1f8237143c",
+      "fingerprint": "80190bdd723a21d2f6f9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "492ec2904cd66e3aea570785": {
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "a185f175a6467325da2f",
-      "heartbeat_date": "2026-09-26",
-      "observed_at": "2026-09-26T04:50:00",
+      "fingerprint": "3225edb2f95236b9e430",
+      "heartbeat_date": "2026-09-27",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "4934aa96949e4335a774f1ae": {
@@ -7825,9 +7825,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a7e9cc0cbee07000187e9e2",
       "face_price": 880.0,
-      "fingerprint": "db15f30827a58f98d902",
+      "fingerprint": "9a04387630acae6bf632",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "49d2a81564a1163411b73213": {
@@ -7915,9 +7915,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1317.0,
-      "fingerprint": "3cf9eac3922b61ab9d8e",
+      "fingerprint": "2d29a5cc34db7b60788f",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "4a44cbb4f6baaccf80f7975f": {
@@ -7996,9 +7996,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1080.0,
-      "fingerprint": "fa20333b75c9d5ccf69d",
+      "fingerprint": "67d349c0f9dac9d0c6c2",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "4acdf13be733dece8af8301c": {
@@ -8068,9 +8068,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "98a0ad8834b6336be7da",
+      "fingerprint": "c0755167aaf476d31d84",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "4b6d7afe1139e374a6ba1508": {
@@ -8320,9 +8320,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "9af1307963a72154f32d",
+      "fingerprint": "e6fcd81639e9f2f02da5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "4e402cfc59cc96dccf5046e4": {
@@ -8509,18 +8509,18 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6a966c84eeed7d00010ce9af",
       "face_price": 498.0,
-      "fingerprint": "558e06c11a8bfaef50b5",
+      "fingerprint": "14191fbfb5b7fd438db8",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:58:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "510593c10f282907b6378873": {
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 1618.0,
-      "fingerprint": "227162ab302491a790d9",
+      "fingerprint": "f2b888b02540871cf253",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "5105d4610ec5593cfc0baa71": {
@@ -9031,9 +9031,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_69e8977b68b27b0001010ff1",
       "face_price": 1080.0,
-      "fingerprint": "d58507f5aa327fe8f9c2",
+      "fingerprint": "b0254b67d6646a95edfe",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "piaoniu"
     },
     "5572fff3d5154a095dd3e782": {
@@ -9121,9 +9121,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 618.0,
-      "fingerprint": "05d2e01b768d919631a2",
+      "fingerprint": "5eeb87071cde9f17197e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "5677e2b1c93513df384da54f": {
@@ -9382,9 +9382,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 380.0,
-      "fingerprint": "586212da9f3dc9855dfb",
+      "fingerprint": "c96aee9850bd88a46a14",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "59776b334b1f70395712a0a3": {
@@ -9490,9 +9490,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a7e9cc0cbee07000187e9e2",
       "face_price": 1280.0,
-      "fingerprint": "6639889f701ddad4dd8c",
+      "fingerprint": "153ac9ff168f2ca7379c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "5adf8f0028bd0e1b1b967098": {
@@ -9508,9 +9508,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1317.0,
-      "fingerprint": "f2b888b02540871cf253",
+      "fingerprint": "f60545b6c0b69a185cf8",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "5b26275590b76874c4a94a19": {
@@ -9634,9 +9634,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6aae60aa9fe2410001a79c27",
       "face_price": 1517.0,
-      "fingerprint": "e1418359c64425add473",
+      "fingerprint": "17a9ac3eae721f183e3d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "5c8aa39e9f3e6cc7383e01ff": {
@@ -9688,9 +9688,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 717.0,
-      "fingerprint": "12a84e901ab5c64ec9ca",
+      "fingerprint": "ded2b2261e16c8fdd8f9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "5cd26c153cdc74499b5b0afe": {
@@ -9814,9 +9814,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": null,
-      "fingerprint": "b6f34c3fcf8893150112",
+      "fingerprint": "55d6c589f91ea75858a9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "5d9bc4e7319e998c102dc002": {
@@ -9940,9 +9940,9 @@
       "artist": "张远",
       "event_id": "mtl_6a86b3f893719300012eb7b6",
       "face_price": null,
-      "fingerprint": "4b424f277fee902691b1",
+      "fingerprint": "7c644165c6adfcf18790",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "5ec664099403e0df264399c5": {
@@ -10201,9 +10201,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1880.0,
-      "fingerprint": "339cc90517aed3dc59ad",
+      "fingerprint": "167cb10e84bd24991d6b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "6180ea2b7f9d6e397d555b14": {
@@ -10327,9 +10327,9 @@
       "artist": "萧敬腾",
       "event_id": "mtl_6aa12b1a30e17b0001071e7c",
       "face_price": 780.0,
-      "fingerprint": "2d0593783d31778d2180",
+      "fingerprint": "12e98d83750132980ff0",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "63ae91c6437bc4f1746be0e2": {
@@ -10408,9 +10408,9 @@
       "artist": "单依纯",
       "event_id": "mtl_6ab2181faa859c0001f73635",
       "face_price": 680.0,
-      "fingerprint": "b6288ebe848df45b33b8",
+      "fingerprint": "1dcdbcfdce8ea9c32a66",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "64b2d864ce51d388a6a9f5a9": {
@@ -10633,9 +10633,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "7a48a2be9b20ab965a3d",
+      "fingerprint": "78da8489064b4350a5c4",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "661d6e7ff8a3dca60d1df512": {
@@ -10813,9 +10813,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "9ef1b7e600f9fadb289c",
+      "fingerprint": "5cba2381d37a58e6306e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "674de8e338bc0e4ec37ceb48": {
@@ -10948,9 +10948,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_6a912725709991000162728b",
       "face_price": null,
-      "fingerprint": "01f5449a1b48f87d6404",
+      "fingerprint": "484635bed203223a8cc1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "68205b93a6fd534219710159": {
@@ -11425,9 +11425,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6a7c1c1dfd9fd40001e5c9cd",
       "face_price": 880.0,
-      "fingerprint": "e4c47d3f77f24ef85f12",
+      "fingerprint": "75f36594acb5ef45a85c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "6b4d3829f5d10e148a67ef3f": {
@@ -11533,9 +11533,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_6a1d27050f8307000115b5da",
       "face_price": null,
-      "fingerprint": "6329560d30da7c49fa60",
+      "fingerprint": "537337af9e4f4bd9e3fc",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "6c47b9bbb48a27f4c6018fae": {
@@ -11605,9 +11605,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6aa3b774b62c4b0001e3c105",
       "face_price": null,
-      "fingerprint": "d5e0523d2d3f124f540a",
+      "fingerprint": "10f1ab829a29c58947c3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "6cb18af9b0198fcfd8bb9f38": {
@@ -11902,18 +11902,18 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "b3aef11270bdd3e56a0e",
+      "fingerprint": "a521cf518bc01ed123d9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "6fc310669e38bf610c677c1c": {
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 480.0,
-      "fingerprint": "216846c33ccbaed2ae8f",
+      "fingerprint": "df17881c7fad9b70d54c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "6fd2e9451465aa49705be208": {
@@ -11992,9 +11992,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 917.0,
-      "fingerprint": "d53e944123933fac7969",
+      "fingerprint": "6d7e9c6b028e5d1ed039",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "706dffbeaa9d18867ed83ce4": {
@@ -12019,9 +12019,9 @@
       "artist": "周深",
       "event_id": "mtl_6a572b1526386c0001da76dc",
       "face_price": 699.0,
-      "fingerprint": "a3d5085026576369e45f",
+      "fingerprint": "c8f6d513c3b89c1e0c2c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "piaoniu"
     },
     "70c54dea1878dad98bb73c66": {
@@ -12055,9 +12055,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6aae60aa9fe2410001a79c27",
       "face_price": 717.0,
-      "fingerprint": "b0ae53ae46c8a7466737",
+      "fingerprint": "6ea20bffd0b69e3fa865",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "70ee9ab73c05e4dae847e79c": {
@@ -12118,9 +12118,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 618.0,
-      "fingerprint": "9ecdc46e73fce63f088f",
+      "fingerprint": "182d52f0894af1822cf5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "71bc1dc195753d0e6ab856c4": {
@@ -12505,9 +12505,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "ab0c237744c360361cf0",
+      "fingerprint": "10933e464730101a1dd3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "751c314c47d905698a354240": {
@@ -12550,9 +12550,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a7e9cc0cbee07000187e9e2",
       "face_price": 1080.0,
-      "fingerprint": "bd22dd2fdcf5d5848fca",
+      "fingerprint": "a1943760ba9d56e7006d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "75b2453999e155a4e1958b5b": {
@@ -12676,9 +12676,9 @@
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 1880.0,
-      "fingerprint": "7aa8ae96b24a5153c9b1",
+      "fingerprint": "15067e771a2b69af9da7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "774a19df8beb5d521b59fd14": {
@@ -12928,9 +12928,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 1318.0,
-      "fingerprint": "c4020eaed9345b0fdfe1",
+      "fingerprint": "3dd6f30953f0510ba7d1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "79e8b2ab4b9eef4b1d49787a": {
@@ -12946,9 +12946,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1517.0,
-      "fingerprint": "917c09dc0cac96974542",
+      "fingerprint": "769780e0f1c3150485f0",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "7a14a2d0113c1268bd17c76b": {
@@ -12973,9 +12973,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "c22c4ce4e2a883392419",
+      "fingerprint": "f38ab3a11cad8bceed2e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "7aa94d5cca987371abbf2306": {
@@ -13441,9 +13441,9 @@
       "artist": "孙燕姿",
       "event_id": "mtl_69eb15cddabe840001c63c0e",
       "face_price": null,
-      "fingerprint": "56fdd244771b39a90277",
+      "fingerprint": "1e783ac9e3883790ee0e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "7f41a447a20a332f94dad501": {
@@ -13567,9 +13567,9 @@
       "artist": "陈粒",
       "event_id": "mtl_6a8e9ba1923a6600014d0ef3",
       "face_price": null,
-      "fingerprint": "9ffcc83d8aaeace2f646",
+      "fingerprint": "ec6ea2d36f32b1d33ead",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:02:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "8011caf897ea15279b59f37e": {
@@ -13639,9 +13639,9 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d8e780973640001bf52fe",
       "face_price": 1199.0,
-      "fingerprint": "233d03be631ea8756b2d",
+      "fingerprint": "f4f0088870d9362ad3e0",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "80e20e9e7141ee3991c8c8fe": {
@@ -13684,9 +13684,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6aa226deea036100014aba37",
       "face_price": 698.0,
-      "fingerprint": "0fc90a793b9d1601687b",
+      "fingerprint": "84e7de942b9e724f100f",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:58:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "815708bbec5bac35e88c3e0e": {
@@ -13774,9 +13774,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a96556710afbb0001601537",
       "face_price": null,
-      "fingerprint": "615c9845549233f41464",
+      "fingerprint": "d19180d80ba03c21e330",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "82d123d5694f851116364a1b": {
@@ -14035,9 +14035,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 780.0,
-      "fingerprint": "a56a3f6646977cf3cda4",
+      "fingerprint": "64f9c0140862e14127f9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "85055ea3618bca7d2706926a": {
@@ -14251,18 +14251,18 @@
       "artist": "刘若英",
       "event_id": "mtl_6a6ad2c9484642000185b635",
       "face_price": null,
-      "fingerprint": "b1dc77ef41b5e4e5a1cd",
+      "fingerprint": "a5cb037051d278f9e137",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "motianlun_cn"
     },
     "86c7ac01adadaf270c0d8e32": {
       "artist": "周深",
       "event_id": "mtl_6a9e263c11c6380001eb4611",
       "face_price": null,
-      "fingerprint": "5f40acd7b876728c8f95",
+      "fingerprint": "9cb0c85c884a0d7d726c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "86e02c3573d9b70239ef2c5d": {
@@ -14368,9 +14368,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6aa226deea036100014aba37",
       "face_price": 398.0,
-      "fingerprint": "72ec427b7b3c61eef74b",
+      "fingerprint": "2d9bfbc65e3e6fda2d9b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "880ed52f038db37271128488": {
@@ -14404,9 +14404,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1680.0,
-      "fingerprint": "22d42479312f9314be52",
+      "fingerprint": "4cf9ecb4c13d34b8b721",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "8843e6c7aba4cdd8c906e6f5": {
@@ -14701,9 +14701,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 680.0,
-      "fingerprint": "b367ffc807b25fe83514",
+      "fingerprint": "e81c31198921f0788f10",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "8b98b34e1960728dda2ec893": {
@@ -14890,9 +14890,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6a7c1c1dfd9fd40001e5c9cd",
       "face_price": 680.0,
-      "fingerprint": "9a4899a6d51fe458c588",
+      "fingerprint": "2ed31f3819be95fbbad7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "8d6e56f33be107e9fac18107": {
@@ -15097,9 +15097,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1.0,
-      "fingerprint": "06edec8dc9db2956f623",
+      "fingerprint": "e12e0054d9ec9fcbe515",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "8f20920fba7bff95eef69b35": {
@@ -15142,9 +15142,9 @@
       "artist": "张远",
       "event_id": "mtl_6aa8ce433158c10001f3ea59",
       "face_price": null,
-      "fingerprint": "4202f77123fb002f895d",
+      "fingerprint": "f8635c61df53c300ee99",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:57:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "8f89a28b1fb563b3aa67849c": {
@@ -15268,9 +15268,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a96556710afbb0001601537",
       "face_price": 980.0,
-      "fingerprint": "fef2cf94e0650964366b",
+      "fingerprint": "ad1cd262b79b69749c4e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "90d6b7bea5d08dbfc1f05e79": {
@@ -15295,9 +15295,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 1280.0,
-      "fingerprint": "41513712f006c30bae4a",
+      "fingerprint": "607167f3d3c18daa8749",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "916938b2e739475193bf6e51": {
@@ -15466,9 +15466,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69c4ad54f08f640001c6fd02",
       "face_price": 1052.0,
-      "fingerprint": "a185f175a6467325da2f",
+      "fingerprint": "35ae7a75c03d5c07cd4f",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "92a7a7ca662d68591d47fe13": {
@@ -15538,9 +15538,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1280.0,
-      "fingerprint": "e12e0054d9ec9fcbe515",
+      "fingerprint": "84f0ab8a7f08bacc65d8",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "938b165c16705ae29963636f": {
@@ -15781,9 +15781,9 @@
       "artist": "周深",
       "event_id": "mtl_6aaf7ceb97a2530001c9c0a3",
       "face_price": null,
-      "fingerprint": "e5305629f2a347c60084",
+      "fingerprint": "8161899bcb5b8d1cd08b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "963d854073708f12e20a611a": {
@@ -15925,9 +15925,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 680.0,
-      "fingerprint": "5a33ab146ede2ef0e5fb",
+      "fingerprint": "4633204f47241dee1736",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "975dc6468b715b3c31c0f19e": {
@@ -15961,9 +15961,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6a585306b86a590001154200",
       "face_price": null,
-      "fingerprint": "199af62ec24750e4c24c",
+      "fingerprint": "5b72922f762f5052f823",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "97a0413159490d8c0a71a736": {
@@ -16195,9 +16195,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1680.0,
-      "fingerprint": "851097847464c8b871f2",
+      "fingerprint": "2ff1dd350bf3a906b6f6",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "99ad93247f7bbfb9a1351829": {
@@ -16222,9 +16222,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1317.0,
-      "fingerprint": "6d7e9c6b028e5d1ed039",
+      "fingerprint": "c1feb86c3bba482db1f7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "99db490a3fcc230138cd85ac": {
@@ -16339,18 +16339,18 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 317.0,
-      "fingerprint": "d223412513274278d03f",
+      "fingerprint": "ba01d0163e1fbba478a2",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "9b3816711e28ea7f776437cd": {
       "artist": "刘若英",
       "event_id": "mtl_6a6ac86e0ac7750001aa33dc",
       "face_price": 1380.0,
-      "fingerprint": "4bb825c2aa6a90190c71",
+      "fingerprint": "9227d7808e2ead72263e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "9b4470a15a6dda4c69cd04ed": {
@@ -16420,9 +16420,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": null,
-      "fingerprint": "b1dc77ef41b5e4e5a1cd",
+      "fingerprint": "a5cb037051d278f9e137",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "motianlun_cn"
     },
     "9c4220aec1a1297ffc24b6af": {
@@ -16483,18 +16483,18 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 1318.0,
-      "fingerprint": "191a928ac47243aea101",
+      "fingerprint": "934d84bddae8863054d9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "9d311a2e57f4888a558161a1": {
       "artist": "陈粒",
       "event_id": "mtl_6a8e9ba1923a6600014d0ef3",
       "face_price": 399.0,
-      "fingerprint": "8fcc2ac28ca3a92b3237",
+      "fingerprint": "7704c2e279818221873c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:02:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "9d66149fb4a68769743cca6b": {
@@ -16546,9 +16546,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 480.0,
-      "fingerprint": "5d39f945ec0b0a02e28a",
+      "fingerprint": "88c7f0382c8c98c7f3be",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "9e2a81c6a1bd5ef92175716e": {
@@ -16654,9 +16654,9 @@
       "artist": "张杰",
       "event_id": "mtl_6a9f933e87b6690001570e8a",
       "face_price": 1.0,
-      "fingerprint": "3e2d4ee818deb9f2653e",
+      "fingerprint": "99395d2156864db1e32c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "piaoniu"
     },
     "9ee823e578677dc9bd2770ce": {
@@ -17239,9 +17239,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_6a0eb1ed16a829000185fd6e",
       "face_price": null,
-      "fingerprint": "3870b9aa64025d5e3a73",
+      "fingerprint": "fef7109a0ede043adf14",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "a492633609d65c0641638c5a": {
@@ -17545,9 +17545,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 517.0,
-      "fingerprint": "656af465ed9dc600d1d7",
+      "fingerprint": "2a1c738fc889750cb3bc",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "a73e23be4c60e33eba503dbb": {
@@ -18148,9 +18148,9 @@
       "artist": "张杰",
       "event_id": "mtl_6a9f933e87b6690001570e8a",
       "face_price": 1.0,
-      "fingerprint": "3e2d4ee818deb9f2653e",
+      "fingerprint": "99395d2156864db1e32c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "piaoniu"
     },
     "ac4556d9095b16a6677b0738": {
@@ -18229,9 +18229,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a589c4afdcd5500010ef596",
       "face_price": null,
-      "fingerprint": "1772310e7e552d4b29e6",
+      "fingerprint": "09257632689a53934095",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "acdd1c7790c3dc1d62e372e6": {
@@ -18562,9 +18562,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a9e549377faf70001e520fe",
       "face_price": 980.0,
-      "fingerprint": "346fbb0721749f462f43",
+      "fingerprint": "281a95ea9283a317d197",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "af40b7733c23c6a926b413e0": {
@@ -18634,9 +18634,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 1317.0,
-      "fingerprint": "46c1058398872ad285b4",
+      "fingerprint": "803cdf9a13e2bf0544b5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "afc3d4eb7dd17b15092399d0": {
@@ -18742,18 +18742,18 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 917.0,
-      "fingerprint": "e17e67fc3492e0b60b41",
+      "fingerprint": "b9b68f52832cdba02577",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "b0fd8f6999e8e694adc19df2": {
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 1680.0,
-      "fingerprint": "6308e2b26e4b7cc9e6ad",
+      "fingerprint": "6fccb7e8fd1316ca659c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "b0fef5aa14f969b14ea293cb": {
@@ -18940,18 +18940,18 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 818.0,
-      "fingerprint": "e3b692a8bd697cd1294e",
+      "fingerprint": "302432597f202e6d224f",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "b3ee2f77f89157cdb362fc97": {
       "artist": "张杰",
       "event_id": "mtl_6aaa2193214252000126ed43",
       "face_price": null,
-      "fingerprint": "dbc8b87fde3d17b44f77",
+      "fingerprint": "112cb6f1bd50935cd69b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "b3fa504abfba87aa4c11a927": {
@@ -19075,9 +19075,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 880.0,
-      "fingerprint": "6852c95064be9e286ab6",
+      "fingerprint": "02152169b36392ec020c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "b50a8185dc7ab518187b9741": {
@@ -19156,9 +19156,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 480.0,
-      "fingerprint": "cc8014dbea65c5240705",
+      "fingerprint": "14e66559fcc26acfe98c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "b5a9d708bfa14bfe597f6546": {
@@ -19201,9 +19201,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_6a1d265aa7d49f000147305e",
       "face_price": null,
-      "fingerprint": "e62cab2826d7bb530a14",
+      "fingerprint": "35a0e8e5661937eed670",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "b5fc27fa40eb80bff5777f79": {
@@ -19228,9 +19228,9 @@
       "artist": "萧敬腾",
       "event_id": "mtl_6a86a965969ace0001a284fe",
       "face_price": 980.0,
-      "fingerprint": "8e0dee5b8b87f5da889d",
+      "fingerprint": "3608635a49217c58c1f9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "b644fb2f12cd9da2e60e6707": {
@@ -19345,9 +19345,9 @@
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 1880.0,
-      "fingerprint": "0351e9776e90e592aff1",
+      "fingerprint": "a378e865e2b09c2d8d54",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "b75aca94dcdecf49c78fee9f": {
@@ -19696,9 +19696,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": null,
-      "fingerprint": "ca3a943c86f7de4756b2",
+      "fingerprint": "681fb04acc3058d088e5",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "bb44882be09c12385adc01f1": {
@@ -19759,9 +19759,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 780.0,
-      "fingerprint": "d251c79345bc256f25ed",
+      "fingerprint": "98a2025ed3e6c61851a0",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:07:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "bbb9976839a7ac70a558a70e": {
@@ -19813,18 +19813,18 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "1fba19ee3522d0d686d2",
+      "fingerprint": "3952a4fefe4cab7ef6df",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "bc43fb939c9fc470ad516bec": {
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "ca3a943c86f7de4756b2",
+      "fingerprint": "3c99fed6fc6fdb85b1b3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "bc5370c975dcf408d5a5792a": {
@@ -19894,9 +19894,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "6f87396c8180e5881b1f",
+      "fingerprint": "64c46374f95823476d53",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "bcc3cdcb2ddd6ff7b1e52fcd": {
@@ -19930,18 +19930,18 @@
       "artist": "单依纯",
       "event_id": "mtl_6ab2181faa859c0001f73635",
       "face_price": null,
-      "fingerprint": "db03a9629ec672fc5c66",
+      "fingerprint": "30dd14a157a0fcb16ac7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "motianlun_cn"
     },
     "bd13bc48ac9ff65456422389": {
       "artist": "李荣浩",
       "event_id": "mtl_69e8977b68b27b0001010ff1",
       "face_price": null,
-      "fingerprint": "bb54cd081ff3a8f474ee",
+      "fingerprint": "e06162980e21633f256c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "bd2d0c7111c757370d840d22": {
@@ -20173,9 +20173,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 680.0,
-      "fingerprint": "daa9ad6e92daf72a28e8",
+      "fingerprint": "21406a784097374e988e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "bf412921db0e31960f8c6d6a": {
@@ -20407,9 +20407,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6aae60aa9fe2410001a79c27",
       "face_price": 717.0,
-      "fingerprint": "3ebb9981bb035a005d28",
+      "fingerprint": "6fea8f10bb027fc33b3e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "c0d9d6ee8990cb7762147054": {
@@ -20632,9 +20632,9 @@
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": 580.0,
-      "fingerprint": "be48aac012d1f6a3577d",
+      "fingerprint": "5b1576e188c0fe3dd8e7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "c3862275be61132f0c4fa7e7": {
@@ -20857,9 +20857,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 1517.0,
-      "fingerprint": "7790cd1b6601edf8b697",
+      "fingerprint": "bce339e25c957a75d482",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "c55ef14d366cbeaf533392ca": {
@@ -20938,9 +20938,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "84f0ab8a7f08bacc65d8",
+      "fingerprint": "58faceda99b67c4ce0c1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "c6d92d348f75478a1aff0e16": {
@@ -21073,9 +21073,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 2080.0,
-      "fingerprint": "d5b5bb9dad16618dd91e",
+      "fingerprint": "fd5b5416889b371a5d68",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "c7c7a303ba031a481f21e13e": {
@@ -21127,9 +21127,9 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d8e780973640001bf52fe",
       "face_price": 1399.0,
-      "fingerprint": "d21421c609ae390de392",
+      "fingerprint": "fbcdc1343bf05517e0b6",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "c855210688d5ce0d8497052f": {
@@ -21235,9 +21235,9 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d8db70973640001bf0eb5",
       "face_price": null,
-      "fingerprint": "0ae3eb2e106afff065ae",
+      "fingerprint": "c3d6b8ebdc1a5c7f9e79",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "c9c607d77cd2366e5d600263": {
@@ -21298,9 +21298,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 317.0,
-      "fingerprint": "413874c6c19b647f4fb7",
-      "heartbeat_date": "2026-09-23",
-      "observed_at": "2026-09-23T04:39:00",
+      "fingerprint": "67a01295c99ca4a02f93",
+      "heartbeat_date": "2026-09-27",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "caad846f01dbae4409bd1bcd": {
@@ -21406,9 +21406,9 @@
       "artist": "张杰",
       "event_id": "mtl_6a9f933e87b6690001570e8a",
       "face_price": 680.0,
-      "fingerprint": "88f7381905e563e72f61",
+      "fingerprint": "585bfb3c0d2418a3cd0b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "piaoniu"
     },
     "cb54ba7659ce45cef5cfeebf": {
@@ -21433,9 +21433,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 717.0,
-      "fingerprint": "12a84e901ab5c64ec9ca",
+      "fingerprint": "ded2b2261e16c8fdd8f9",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "cb985fae86ad879c939a4e96": {
@@ -21559,9 +21559,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6ab6470eb1fe04000150ccc3",
       "face_price": 1517.0,
-      "fingerprint": "9e0ad80bbbe182e42449",
+      "fingerprint": "22c3a8f8350d1ae91b67",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "ccc2ccc68231c4a9a72ad56b": {
@@ -21964,9 +21964,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1880.0,
-      "fingerprint": "8a49c4382dbf5d353486",
+      "fingerprint": "bd5e05e379c0a3beaff1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "d03db4fb170f673859c19611": {
@@ -22099,9 +22099,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a72db46b2c6b200015160d5",
       "face_price": 1299.0,
-      "fingerprint": "1a20775c7bfe4176ab62",
+      "fingerprint": "191a928ac47243aea101",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:55:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "d1711dfd75fe3ce7ae2ca19f": {
@@ -22180,9 +22180,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1.0,
-      "fingerprint": "67a01295c99ca4a02f93",
+      "fingerprint": "0026b1f5365a8b0054ed",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:12:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "d24395e842a338e95af62cba": {
@@ -22234,9 +22234,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": null,
-      "fingerprint": "5aab384cdb4ae95d6807",
+      "fingerprint": "9f4e29b67c0bcb18447b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "motianlun_cn"
     },
     "d2a828ccd8c517e605006447": {
@@ -22315,9 +22315,9 @@
       "artist": "李荣浩",
       "event_id": "mtl_6a87fd78b3e86b0001689cad",
       "face_price": null,
-      "fingerprint": "52bcc28184b143eaa2bd",
+      "fingerprint": "484635bed203223a8cc1",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:57:00",
+      "observed_at": "2026-09-27T16:56:00",
       "source": "motianlun_cn"
     },
     "d3450685825e998e702e7079": {
@@ -22558,9 +22558,9 @@
       "artist": "周深",
       "event_id": "mtl_6a572b1526386c0001da76dc",
       "face_price": null,
-      "fingerprint": "3ad43dde60bce4c93e4b",
+      "fingerprint": "5d27bd0cb8ec1ed38328",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "motianlun_cn"
     },
     "d54967b367535ca583b793a4": {
@@ -22666,9 +22666,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6aa226deea036100014aba37",
       "face_price": null,
-      "fingerprint": "d7c0ad12095e1738c1df",
+      "fingerprint": "163068f99e98ea553b27",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:09:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "motianlun_cn"
     },
     "d65b019e667a0aae030b7c33": {
@@ -22720,18 +22720,18 @@
       "artist": "陈粒",
       "event_id": "mtl_6a8e9ad8923a6600014d0e88",
       "face_price": null,
-      "fingerprint": "201953bb08269ef29e39",
+      "fingerprint": "dc01a219247130169db2",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:13:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "d7481462f2fca685727a89aa": {
       "artist": "许嵩",
       "event_id": "mtl_6a3b4a25bcac4b0001db2515",
       "face_price": 1318.0,
-      "fingerprint": "062509dfcbba62b9fe9c",
+      "fingerprint": "4b5a571e8bc40acff70c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "piaoniu"
     },
     "d75241615b2290a218d9316f": {
@@ -23026,9 +23026,9 @@
       "artist": "刘若英",
       "event_id": "mtl_6a6ac86e0ac7750001aa33dc",
       "face_price": 580.0,
-      "fingerprint": "57e0499f9da68c457a91",
+      "fingerprint": "70a4de4abb8759b76df3",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "da1f92742786da49501150cf": {
@@ -23566,9 +23566,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 380.0,
-      "fingerprint": "813d4463efe4f1e981a3",
+      "fingerprint": "2d401c7c015b21b64a77",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "de5e481d789b72ed2344e8b6": {
@@ -24133,18 +24133,18 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1880.0,
-      "fingerprint": "e769de83ad10facce608",
+      "fingerprint": "cc234b4fa4eda49886be",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "e34d598099c8f95fc9b2321d": {
       "artist": "萧敬腾",
       "event_id": "mtl_6aa12b1a30e17b0001071e7c",
       "face_price": 980.0,
-      "fingerprint": "1be65d159a4791736172",
+      "fingerprint": "b3891650ebb884d18568",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "e35255dde2b9e956f9d19191": {
@@ -24430,9 +24430,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6a7c1c1dfd9fd40001e5c9cd",
       "face_price": null,
-      "fingerprint": "3717eb24c37d59544fd3",
+      "fingerprint": "163ce6d9db1961aa051b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "e66f02fb749105847a392666": {
@@ -24448,9 +24448,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 1717.0,
-      "fingerprint": "b5807584d644751b4830",
+      "fingerprint": "b933681cfe598fda8f86",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "e672ce4f5400c4c27f37c238": {
@@ -24511,9 +24511,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6aae60aa9fe2410001a79c27",
       "face_price": null,
-      "fingerprint": "411d9e239a30b66aafeb",
+      "fingerprint": "94d8831dc07497ca335d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "motianlun_cn"
     },
     "e6b33744a265ee9a98320b10": {
@@ -24547,9 +24547,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6ab49688aa859c0001f7edb5",
       "face_price": 1280.0,
-      "fingerprint": "6eec5886a32642d2172e",
+      "fingerprint": "505e461739fac2856237",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "e6df03a26466e929cc02473e": {
@@ -24961,18 +24961,18 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a6c4df63fb6230001fba560",
       "face_price": 1080.0,
-      "fingerprint": "bd22dd2fdcf5d5848fca",
+      "fingerprint": "a1943760ba9d56e7006d",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:10:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "ea13f27eddc8b71053594271": {
       "artist": "刘若英",
       "event_id": "mtl_6a6ad2c9484642000185b635",
       "face_price": 399.0,
-      "fingerprint": "2895db0341598c3ded10",
+      "fingerprint": "5e70e0cfa66bc5fa1f4c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:06:00",
+      "observed_at": "2026-09-27T16:53:00",
       "source": "piaoniu"
     },
     "ea2678a841d2f7b8aaadd275": {
@@ -25042,9 +25042,9 @@
       "artist": "许嵩",
       "event_id": "mtl_6a9e26be0cc9f300018ed025",
       "face_price": 818.0,
-      "fingerprint": "a06049197abfe35f4628",
+      "fingerprint": "e3b692a8bd697cd1294e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:01:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "ea99e808fc05172e0bda7769": {
@@ -25132,9 +25132,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 917.0,
-      "fingerprint": "f38ab3a11cad8bceed2e",
+      "fingerprint": "57c507c1de30b27c9059",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "eb726b066572f08225475cb4": {
@@ -25213,9 +25213,9 @@
       "artist": "王力宏",
       "event_id": "mtl_69eb404420e06000016027fd",
       "face_price": null,
-      "fingerprint": "5f40acd7b876728c8f95",
+      "fingerprint": "9cb0c85c884a0d7d726c",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "motianlun_cn"
     },
     "ec4efe9643282e91f6e2b8a0": {
@@ -25438,9 +25438,9 @@
       "artist": "林宥嘉",
       "event_id": "mtl_6a7e9cc0cbee07000187e9e2",
       "face_price": 1280.0,
-      "fingerprint": "1cebbd69127a99c6443f",
+      "fingerprint": "f3e7969270938b574703",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "eeb7dd80e3f2eaa08db24a9f": {
@@ -25465,9 +25465,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 2380.0,
-      "fingerprint": "3892940f1acf6f242fd5",
+      "fingerprint": "7105eee8a6a13e83c33e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "ef0d7f44252d7ce15ea05370": {
@@ -25519,9 +25519,9 @@
       "artist": "王力宏",
       "event_id": "mtl_6a96556710afbb0001601537",
       "face_price": 980.0,
-      "fingerprint": "09186d5ff82f08597725",
+      "fingerprint": "18cff888688b3ab7b692",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "ef9d89a454f0fbd17a9bd210": {
@@ -25609,9 +25609,9 @@
       "artist": "萧敬腾",
       "event_id": "mtl_6aa12b1a30e17b0001071e7c",
       "face_price": null,
-      "fingerprint": "fd83e6a208548928fc9f",
+      "fingerprint": "aa772ed31eb58a3e6486",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "motianlun_cn"
     },
     "f031a6a78796c099c4d7a488": {
@@ -25672,9 +25672,9 @@
       "artist": "陈粒",
       "event_id": "mtl_6a63073cce972400012c26a8",
       "face_price": null,
-      "fingerprint": "b6d99e23eaff32e03c35",
+      "fingerprint": "be53a8d78ccde475421b",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:13:00",
+      "observed_at": "2026-09-27T17:00:00",
       "source": "motianlun_cn"
     },
     "f0ed563e42ad07b4220a1609": {
@@ -26257,9 +26257,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6a7c1c1dfd9fd40001e5c9cd",
       "face_price": 380.0,
-      "fingerprint": "505314f9255706f24185",
+      "fingerprint": "b7ca2452ac380e4360fe",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "f61c0530fea1389f08c845ad": {
@@ -26320,9 +26320,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6aa3b02fc30dcc00012b81da",
       "face_price": 380.0,
-      "fingerprint": "397362c105f95d8f9f1b",
+      "fingerprint": "5d7076c8121b1e1c27d4",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "f6a856964da28a7f485e4a33": {
@@ -26653,9 +26653,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "7be1573d32805f280fe0",
+      "fingerprint": "ad3209f69869de6f5801",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "fab86256dbb5bd1875a59c3e": {
@@ -26698,9 +26698,9 @@
       "artist": "薛之谦",
       "event_id": "mtl_6a866f57969ace0001a25a56",
       "face_price": 717.0,
-      "fingerprint": "757ba68a09d07e96397f",
+      "fingerprint": "1a20775c7bfe4176ab62",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T12:00:00",
+      "observed_at": "2026-09-27T16:59:00",
       "source": "piaoniu"
     },
     "fad7e1f808c116af7ba92177": {
@@ -26860,9 +26860,9 @@
       "artist": "周杰伦",
       "event_id": "mtl_69fc28872f5124000134bd75",
       "face_price": 1080.0,
-      "fingerprint": "228297e3787b7c8dff65",
+      "fingerprint": "4ffe5f0a4e9b8c60823e",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:56:00",
+      "observed_at": "2026-09-27T16:54:00",
       "source": "piaoniu"
     },
     "fc350bf3d4fdc6e219e4c481": {
@@ -26914,9 +26914,9 @@
       "artist": "汪苏泷",
       "event_id": "mtl_6a7c1c1dfd9fd40001e5c9cd",
       "face_price": 480.0,
-      "fingerprint": "5e189fcff0ce4c7b66da",
+      "fingerprint": "9140cfbf213b5f0e1663",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:11:00",
+      "observed_at": "2026-09-27T16:58:00",
       "source": "piaoniu"
     },
     "fc9632fe35c1f06e3f5e7373": {
@@ -26941,9 +26941,9 @@
       "artist": "周深",
       "event_id": "mtl_6a572b1526386c0001da76dc",
       "face_price": 1399.0,
-      "fingerprint": "57c507c1de30b27c9059",
+      "fingerprint": "c1feb86c3bba482db1f7",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T05:08:00",
+      "observed_at": "2026-09-27T16:55:00",
       "source": "piaoniu"
     },
     "fcb4a8617208860d574f6464": {
@@ -26959,9 +26959,9 @@
       "artist": "杨千嬅",
       "event_id": "mtl_6a966c84eeed7d00010ce9af",
       "face_price": 598.0,
-      "fingerprint": "a4266515b7d63c261723",
+      "fingerprint": "c3b43024afb87f1dd026",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:58:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "fccd24535fb5a0c0b62e595e": {
@@ -27238,9 +27238,9 @@
       "artist": "梁静茹",
       "event_id": "mtl_6a0d8e780973640001bf52fe",
       "face_price": 999.0,
-      "fingerprint": "88fe9da7abd3ccdd845a",
+      "fingerprint": "ac2efd330ca088554b27",
       "heartbeat_date": "2026-09-27",
-      "observed_at": "2026-09-27T11:59:00",
+      "observed_at": "2026-09-27T16:57:00",
       "source": "piaoniu"
     },
     "ff5ca8ec99050abcae842344": {
@@ -27298,6 +27298,6 @@
       "source": "piaoniu"
     }
   },
-  "updated_at": "2026-09-27T12:02:15",
+  "updated_at": "2026-09-27T17:00:47",
   "version": 1
 }
